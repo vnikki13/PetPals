@@ -28,7 +28,7 @@ class RegisterViewController: UIViewController {
                     print(error.localizedDescription)
                 } else {
                     print("success")
-                    self.performSegue(withIdentifier: "RegisterToHome", sender: self)
+                    self.performSegue(withIdentifier: K.registerSegue, sender: self)
                 }
             }
         }

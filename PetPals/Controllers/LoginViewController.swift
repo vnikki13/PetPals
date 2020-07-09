@@ -27,7 +27,7 @@ class LoginViewController: UIViewController {
                     print(error.localizedDescription)
                 } else {
                     print("success")
-                    self.performSegue(withIdentifier: "LoginToHome", sender: self)
+                    self.performSegue(withIdentifier: K.loginSegue, sender: self)
                 }
             }
         }

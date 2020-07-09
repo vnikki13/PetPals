@@ -13,7 +13,7 @@ class ChatViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = "PetPals🐾"
+        title = K.appName
 
         // Do any additional setup after loading the view.
     }
