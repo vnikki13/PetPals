@@ -18,6 +18,7 @@
 		A115E5B424B7AB6800AEC483 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A115E5B324B7AB6800AEC483 /* HomeViewController.swift */; };
 		A115E5B624B7AE6900AEC483 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A115E5B524B7AE6900AEC483 /* LoginViewController.swift */; };
 		A115E5B824B7AE7800AEC483 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A115E5B724B7AE7800AEC483 /* RegisterViewController.swift */; };
+		A1E3BCA624B7BC34000E5041 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E3BCA524B7BC34000E5041 /* ChatViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		A115E5B324B7AB6800AEC483 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		A115E5B524B7AE6900AEC483 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		A115E5B724B7AE7800AEC483 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
+		A1E3BCA524B7BC34000E5041 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,6 +125,7 @@
 				A115E5B324B7AB6800AEC483 /* HomeViewController.swift */,
 				A115E5B524B7AE6900AEC483 /* LoginViewController.swift */,
 				A115E5B724B7AE7800AEC483 /* RegisterViewController.swift */,
+				A1E3BCA524B7BC34000E5041 /* ChatViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -246,6 +249,7 @@
 				A115E59F24B79B3E00AEC483 /* WelcomeViewController.swift in Sources */,
 				A115E59B24B79B3E00AEC483 /* AppDelegate.swift in Sources */,
 				A115E59D24B79B3E00AEC483 /* SceneDelegate.swift in Sources */,
+				A1E3BCA624B7BC34000E5041 /* ChatViewController.swift in Sources */,
 				A115E5B824B7AE7800AEC483 /* RegisterViewController.swift in Sources */,
 				A115E5B624B7AE6900AEC483 /* LoginViewController.swift in Sources */,
 				A115E5B424B7AB6800AEC483 /* HomeViewController.swift in Sources */,
