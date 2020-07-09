@@ -7,15 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6C175C6FBFA760301720F1BA /* Pods_PetPals.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2937064FAAE10142FB227C38 /* Pods_PetPals.framework */; };
 		A115E59B24B79B3E00AEC483 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A115E59A24B79B3E00AEC483 /* AppDelegate.swift */; };
 		A115E59D24B79B3E00AEC483 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A115E59C24B79B3E00AEC483 /* SceneDelegate.swift */; };
 		A115E59F24B79B3E00AEC483 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A115E59E24B79B3E00AEC483 /* ViewController.swift */; };
 		A115E5A224B79B3E00AEC483 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A115E5A024B79B3E00AEC483 /* Main.storyboard */; };
 		A115E5A424B79B4000AEC483 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A115E5A324B79B4000AEC483 /* Assets.xcassets */; };
 		A115E5A724B79B4000AEC483 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A115E5A524B79B4000AEC483 /* LaunchScreen.storyboard */; };
+		A115E5AF24B7A0D200AEC483 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A115E5AE24B7A0D200AEC483 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2937064FAAE10142FB227C38 /* Pods_PetPals.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PetPals.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6267A451F3DC91C473809624 /* Pods-PetPals.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PetPals.release.xcconfig"; path = "Target Support Files/Pods-PetPals/Pods-PetPals.release.xcconfig"; sourceTree = "<group>"; };
+		7A18BE6B233BFEF93BE373F6 /* Pods-PetPals.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PetPals.debug.xcconfig"; path = "Target Support Files/Pods-PetPals/Pods-PetPals.debug.xcconfig"; sourceTree = "<group>"; };
 		A115E59724B79B3E00AEC483 /* PetPals.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PetPals.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A115E59A24B79B3E00AEC483 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A115E59C24B79B3E00AEC483 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -24,6 +29,7 @@
 		A115E5A324B79B4000AEC483 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A115E5A624B79B4000AEC483 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A115E5A824B79B4000AEC483 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A115E5AE24B7A0D200AEC483 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,17 +37,38 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6C175C6FBFA760301720F1BA /* Pods_PetPals.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0B54AEBBA8E66E6DFFBDA434 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2937064FAAE10142FB227C38 /* Pods_PetPals.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		340EF8D6EEB9C5432457871B /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				7A18BE6B233BFEF93BE373F6 /* Pods-PetPals.debug.xcconfig */,
+				6267A451F3DC91C473809624 /* Pods-PetPals.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		A115E58E24B79B3E00AEC483 = {
 			isa = PBXGroup;
 			children = (
 				A115E59924B79B3E00AEC483 /* PetPals */,
 				A115E59824B79B3E00AEC483 /* Products */,
+				340EF8D6EEB9C5432457871B /* Pods */,
+				0B54AEBBA8E66E6DFFBDA434 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -63,6 +90,7 @@
 				A115E5A324B79B4000AEC483 /* Assets.xcassets */,
 				A115E5A524B79B4000AEC483 /* LaunchScreen.storyboard */,
 				A115E5A824B79B4000AEC483 /* Info.plist */,
+				A115E5AE24B7A0D200AEC483 /* GoogleService-Info.plist */,
 			);
 			path = PetPals;
 			sourceTree = "<group>";
@@ -74,9 +102,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A115E5AB24B79B4000AEC483 /* Build configuration list for PBXNativeTarget "PetPals" */;
 			buildPhases = (
+				B50A25BEB9B781A9329F0A9C /* [CP] Check Pods Manifest.lock */,
 				A115E59324B79B3E00AEC483 /* Sources */,
 				A115E59424B79B3E00AEC483 /* Frameworks */,
 				A115E59524B79B3E00AEC483 /* Resources */,
+				B5797067E1D1E7E10B6A4BAA /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -126,12 +156,55 @@
 			buildActionMask = 2147483647;
 			files = (
 				A115E5A724B79B4000AEC483 /* LaunchScreen.storyboard in Resources */,
+				A115E5AF24B7A0D200AEC483 /* GoogleService-Info.plist in Resources */,
 				A115E5A424B79B4000AEC483 /* Assets.xcassets in Resources */,
 				A115E5A224B79B3E00AEC483 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		B50A25BEB9B781A9329F0A9C /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-PetPals-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B5797067E1D1E7E10B6A4BAA /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-PetPals/Pods-PetPals-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-PetPals/Pods-PetPals-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PetPals/Pods-PetPals-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		A115E59324B79B3E00AEC483 /* Sources */ = {
@@ -282,6 +355,7 @@
 		};
 		A115E5AC24B79B4000AEC483 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7A18BE6B233BFEF93BE373F6 /* Pods-PetPals.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -300,6 +374,7 @@
 		};
 		A115E5AD24B79B4000AEC483 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6267A451F3DC91C473809624 /* Pods-PetPals.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;

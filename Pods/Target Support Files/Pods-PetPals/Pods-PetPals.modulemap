@@ -1,0 +1,6 @@
+framework module Pods_PetPals {
+  umbrella header "Pods-PetPals-umbrella.h"
+
+  export *
+  module * { export * }
+}
