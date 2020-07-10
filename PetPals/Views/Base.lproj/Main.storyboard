@@ -338,7 +338,7 @@
                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large"/>
                                 </state>
                                 <connections>
-                                    <action selector="sendPressed:" destination="AV3-Kt-mc2" eventType="touchUpInside" id="pHT-5n-i3B"/>
+                                    <action selector="sendPressed:" destination="AV3-Kt-mc2" eventType="touchUpInside" id="6yt-TR-8Mj"/>
                                 </connections>
                             </button>
                         </subviews>
