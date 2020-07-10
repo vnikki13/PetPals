@@ -14,6 +14,7 @@ struct K {
     static let cellNibName = "MessageCell"
     static let registerSegue = "RegisterToHome"
     static let loginSegue = "LoginToHome"
+    static let conversationsSegue = "ConversationsToChats"
     
     struct BrandColors {
         static let purple = "BrandPurple"
