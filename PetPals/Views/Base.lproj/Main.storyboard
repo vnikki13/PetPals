@@ -84,6 +84,46 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="First Name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fiP-ui-dG2">
+                                <rect key="frame" x="76" y="218" width="263" height="39.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="263" id="I6m-16-t8R"/>
+                                    <constraint firstAttribute="height" constant="39.5" id="u6x-HI-6sK"/>
+                                </constraints>
+                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Last Name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZWP-48-Dso">
+                                <rect key="frame" x="76" y="279" width="263" height="39.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="39.5" id="1Bq-X3-poJ"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="263" id="fH6-MV-cEo"/>
+                                </constraints>
+                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9yD-kj-lYG">
+                                <rect key="frame" x="76" y="334" width="263" height="39.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="39.5" id="FSa-56-n7R"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="263" id="Odq-hC-UW8"/>
+                                </constraints>
+                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WZn-Qi-1Vz">
+                                <rect key="frame" x="76" y="391" width="263" height="39.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="263" id="7Gs-95-n2V"/>
+                                    <constraint firstAttribute="height" constant="39.5" id="sBk-zs-7O7"/>
+                                </constraints>
+                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                            </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XqE-ty-h8i">
                                 <rect key="frame" x="20" y="703" width="374" height="79"/>
                                 <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -99,47 +139,35 @@
                                     <action selector="registerButtonPressed:" destination="uKK-Fb-4ZF" eventType="touchUpInside" id="Kra-Vw-BsL"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9yD-kj-lYG">
-                                <rect key="frame" x="76" y="238" width="263" height="39.5"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="39.5" id="FSa-56-n7R"/>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="263" id="Odq-hC-UW8"/>
-                                </constraints>
-                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WZn-Qi-1Vz">
-                                <rect key="frame" x="76" y="297" width="263" height="39.5"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="263" id="7Gs-95-n2V"/>
-                                    <constraint firstAttribute="height" constant="39.5" id="sBk-zs-7O7"/>
-                                </constraints>
-                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
-                            </textField>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="9yD-kj-lYG" firstAttribute="leading" secondItem="v8a-TY-g3i" secondAttribute="leading" constant="76" id="0Ig-fl-G6D"/>
+                            <constraint firstItem="WZn-Qi-1Vz" firstAttribute="top" secondItem="9yD-kj-lYG" secondAttribute="bottom" constant="17.5" id="3S5-h6-jZs"/>
+                            <constraint firstItem="9yD-kj-lYG" firstAttribute="top" secondItem="ZWP-48-Dso" secondAttribute="bottom" constant="15.5" id="4SX-tL-ytg"/>
                             <constraint firstItem="v8a-TY-g3i" firstAttribute="bottom" secondItem="XqE-ty-h8i" secondAttribute="bottom" constant="80" id="8EA-ls-GCI"/>
-                            <constraint firstItem="WZn-Qi-1Vz" firstAttribute="top" secondItem="9yD-kj-lYG" secondAttribute="bottom" constant="19.5" id="DDf-pL-kdV"/>
-                            <constraint firstItem="v8a-TY-g3i" firstAttribute="trailing" secondItem="WZn-Qi-1Vz" secondAttribute="trailing" constant="75" id="K5p-fU-DjP"/>
-                            <constraint firstItem="v8a-TY-g3i" firstAttribute="trailing" secondItem="9yD-kj-lYG" secondAttribute="trailing" constant="75" id="RhJ-n5-1lD"/>
+                            <constraint firstItem="ZWP-48-Dso" firstAttribute="leading" secondItem="v8a-TY-g3i" secondAttribute="leading" constant="76" id="Eg0-v8-qav"/>
+                            <constraint firstItem="v8a-TY-g3i" firstAttribute="trailing" secondItem="ZWP-48-Dso" secondAttribute="trailing" constant="75" id="GVN-2T-9up"/>
+                            <constraint firstItem="v8a-TY-g3i" firstAttribute="trailing" secondItem="fiP-ui-dG2" secondAttribute="trailing" constant="75" id="KKa-4Q-vH9"/>
+                            <constraint firstItem="fiP-ui-dG2" firstAttribute="leading" secondItem="v8a-TY-g3i" secondAttribute="leading" constant="76" id="Ky8-bl-WmA"/>
                             <constraint firstItem="v8a-TY-g3i" firstAttribute="trailing" secondItem="XqE-ty-h8i" secondAttribute="trailing" constant="20" id="U0f-ZK-GQm"/>
                             <constraint firstItem="v8a-TY-g3i" firstAttribute="trailing" secondItem="N5j-9F-AJ6" secondAttribute="trailing" constant="20" id="X2k-Ao-Sqg"/>
                             <constraint firstItem="XqE-ty-h8i" firstAttribute="leading" secondItem="v8a-TY-g3i" secondAttribute="leading" constant="20" id="a7P-82-T07"/>
-                            <constraint firstItem="WZn-Qi-1Vz" firstAttribute="leading" secondItem="v8a-TY-g3i" secondAttribute="leading" constant="76" id="bP0-Jf-Ywi"/>
-                            <constraint firstItem="9yD-kj-lYG" firstAttribute="leading" secondItem="v8a-TY-g3i" secondAttribute="leading" constant="76" id="ibB-Sp-4af"/>
+                            <constraint firstItem="v8a-TY-g3i" firstAttribute="trailing" secondItem="WZn-Qi-1Vz" secondAttribute="trailing" constant="75" id="g72-Yz-G8L"/>
+                            <constraint firstItem="ZWP-48-Dso" firstAttribute="top" secondItem="fiP-ui-dG2" secondAttribute="bottom" constant="21.5" id="jaD-rv-9nh"/>
                             <constraint firstItem="N5j-9F-AJ6" firstAttribute="leading" secondItem="v8a-TY-g3i" secondAttribute="leading" constant="20" id="osA-zB-b2K"/>
-                            <constraint firstItem="9yD-kj-lYG" firstAttribute="top" secondItem="N5j-9F-AJ6" secondAttribute="bottom" constant="96" id="sjZ-sG-760"/>
                             <constraint firstItem="N5j-9F-AJ6" firstAttribute="top" secondItem="v8a-TY-g3i" secondAttribute="top" id="sy3-dx-fiY"/>
+                            <constraint firstItem="fiP-ui-dG2" firstAttribute="top" secondItem="N5j-9F-AJ6" secondAttribute="bottom" constant="76" id="v0v-ZE-E2h"/>
+                            <constraint firstItem="WZn-Qi-1Vz" firstAttribute="leading" secondItem="v8a-TY-g3i" secondAttribute="leading" constant="76" id="y2Q-FI-BG2"/>
+                            <constraint firstItem="v8a-TY-g3i" firstAttribute="trailing" secondItem="9yD-kj-lYG" secondAttribute="trailing" constant="75" id="zq5-T3-vmW"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="v8a-TY-g3i"/>
                     </view>
                     <navigationItem key="navigationItem" id="g88-vi-XZP"/>
                     <connections>
                         <outlet property="emailTextField" destination="9yD-kj-lYG" id="vVR-fi-EFJ"/>
+                        <outlet property="firstNameTextField" destination="fiP-ui-dG2" id="Neu-mp-QlU"/>
+                        <outlet property="lastNameTextField" destination="ZWP-48-Dso" id="xjf-kq-lO4"/>
                         <outlet property="passwordTextField" destination="WZn-Qi-1Vz" id="hjv-qq-Jdl"/>
                         <segue destination="wsh-R6-8bO" kind="show" identifier="RegisterToHome" id="X2B-Jx-xUK"/>
                     </connections>
@@ -444,6 +472,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="5Za-IJ-ynm"/>
+        <segue reference="X2B-Jx-xUK"/>
     </inferredMetricsTieBreakers>
 </document>

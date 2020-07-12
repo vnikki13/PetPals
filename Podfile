@@ -7,7 +7,7 @@ target 'PetPals' do
   pod 'Firebase/Auth'
   pod 'Firebase/Firestore'
 
-  # Pods for IQKeyboardManager
-  pod 'IQKeyboardManagerSwift'
+  # Pods for Messaging UI
+  pod 'MessageKit'
 
 end
