@@ -11,6 +11,7 @@ import Firebase
 
 class ConversationsViewController: UIViewController {
 
+    private let db = Firestore.firestore()
     private var conversations = [Conversation]()
     
     private let tableView: UITableView = {
@@ -33,7 +34,7 @@ class ConversationsViewController: UIViewController {
         return label
     }()
     
-    let db = Firestore.firestore()
+
     var otherUserName: String?
     var otherUserEmail: String?
     var userNames: [String] = []
@@ -87,15 +88,28 @@ class ConversationsViewController: UIViewController {
     }
     
     @objc private func didTapComposeButton() {
-        // Want to show newConversation controller
-//        let vc = NewConversationViewController()
-//        vc.completion = { [weak self] result in
-//            print("\(result)")
-//            self?.createNewConversation(result: result)
-//        }
-//        let navVC = UINavigationController(rootViewController: vc)
-//        present(navVC, animated: true)
+//         Want to show newConversation controller
+        let vc = NewConversationViewController()
+        vc.completion = { [weak self] result in
+            print("these are the results of selecting a user")
+            print("\(result)")
+            self?.createNewConversation(result: result)
+        }
+        let navVC = UINavigationController(rootViewController: vc)
+        present(navVC, animated: true)
         print("pushed compose button")
+        
+    }
+    
+    private func createNewConversation(result: [String: String]) {
+        guard let name = result["name"], let email = result["email"] else {
+            return
+        }
+        var vc = ChatViewController(with: email, id: name)
+        vc.isNewConversation = true
+        vc.title = name
+        vc.navigationItem.largeTitleDisplayMode = .never
+        navigationController?.pushViewController(vc, animated: true)
         
     }
     
@@ -153,14 +167,6 @@ class ConversationsViewController: UIViewController {
             }
         }
     }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let destinationVC = segue.destination as! ChatViewController
-        destinationVC.title = otherUserName
-        destinationVC.otherUserEmail = otherUserEmail
-        
-    }
-    
 }
 
 // 3: Make some data with DataSource
@@ -192,7 +198,7 @@ extension ConversationsViewController: UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
         let model = conversations[indexPath.row]
         
-        let vc = ChatViewController()
+        let vc = ChatViewController(with: model.otherUserEmail, id: model.id)
         vc.navigationItem.largeTitleDisplayMode = .never
         navigationController?.pushViewController(vc, animated: true)
  

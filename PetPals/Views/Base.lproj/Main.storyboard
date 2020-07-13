@@ -312,39 +312,6 @@
             </objects>
             <point key="canvasLocation" x="2968.115942028986" y="154.6875"/>
         </scene>
-        <!--Chat View Controller-->
-        <scene sceneID="hxF-zC-V0S">
-            <objects>
-                <viewController id="AV3-Kt-mc2" customClass="ChatViewController" customModule="PetPals" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="X0A-w0-snT">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Chat" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="20g-30-klt">
-                                <rect key="frame" x="20" y="88" width="374" height="54"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="374" id="24z-Wv-Dp1"/>
-                                    <constraint firstAttribute="height" constant="54" id="DXY-f6-8v7"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="45"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <constraints>
-                            <constraint firstItem="ILC-HU-Qfo" firstAttribute="trailing" secondItem="20g-30-klt" secondAttribute="trailing" constant="20" id="G9O-Gl-oCi"/>
-                            <constraint firstItem="20g-30-klt" firstAttribute="leading" secondItem="ILC-HU-Qfo" secondAttribute="leading" constant="20" id="VSu-yM-15G"/>
-                            <constraint firstItem="20g-30-klt" firstAttribute="top" secondItem="ILC-HU-Qfo" secondAttribute="top" id="j4h-rd-xek"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="ILC-HU-Qfo"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="GHU-34-f0X"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="HA2-WC-ISF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="4926" y="155"/>
-        </scene>
         <!--Conversations View Controller-->
         <scene sceneID="Pf4-w5-HOn">
             <objects>
@@ -375,9 +342,6 @@
                         <viewLayoutGuide key="safeArea" id="1qy-dz-jl0"/>
                     </view>
                     <navigationItem key="navigationItem" id="ir7-HL-jcX"/>
-                    <connections>
-                        <segue destination="AV3-Kt-mc2" kind="show" identifier="ConversationsToChats" id="28G-DK-eYI"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="al2-dL-u2T" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

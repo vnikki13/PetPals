@@ -14,16 +14,27 @@ import InputBarAccessoryView
 class ChatViewController: MessagesViewController {
     
     let db = Firestore.firestore()
-    var otherUserEmail: String?
     
-    var isNewConversation = false
-    var messages: [MessageType] = []
+    public let recipientEmail: String
+    private var conversationId: String?
+    public var isNewConversation = false
+    
+    var messages = [MessageType]()
     
     public struct Sender: SenderType {
         public let senderId: String
         public let displayName: String
     }
     
+    init(with email: String, id: String?) {
+        self.conversationId = id
+        self.recipientEmail = email
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,16 +57,16 @@ class ChatViewController: MessagesViewController {
 }
 
 extension ChatViewController: InputBarAccessoryViewDelegate {
-    func inputBar(_ inputBar: InputBarAccessoryView, didPressSendButtonWith text: String) {
-        guard !text.replacingOccurrences(of: " ", with: "").isEmpty,
-            let senderEmail = Auth.auth().currentUser?.email, let recipentEmail = otherUserEmail else {
+    func inputBar(_ inputBar: InputBarAccessoryView, didPressSendButtonWith message: String) {
+        guard !message.replacingOccurrences(of: " ", with: "").isEmpty,
+            let senderEmail = Auth.auth().currentUser?.email else {
                 return
         }
         
-        print("Sending message: \(text)")
+        print("Sending message: \(message)")
         
         
-//        DatabaseManager()
+        DatabaseManager().sendMessage(from: senderEmail, to: recipientEmail, with: message)
 //        db.collection("conversations")
 //            .whereField("participants", in: [[senderEmail, recipentEmail], [recipentEmail, senderEmail]])
 //            .getDocuments() { (querySnapshot, err) in
