@@ -51,12 +51,20 @@ class DatabaseManager {
         docRef.getDocument{ (document, error ) in
             if let document = document, document.exists {
                 let dataDescription = document.data()
-//                print("Document data: \(dataDescription!["firstName"])")
                 self.recipientFirstName = dataDescription!["firstName"] as! String
             } else {
                 print("Document does not exist")
             }
         }
+    }
+    
+    // Adding a message to the messages collection for a specific ID
+    func insertMessage(with docID: String, for sender: String, with text: String) {
+        self.db.collection("conversations/\(docID)/messages").document().setData([
+            "message": text,
+            "sender": sender,
+            "date": Date()
+        ])
     }
     
     // Starting a new conversation
@@ -78,12 +86,7 @@ class DatabaseManager {
                 print("Created new convo and saved message to database")
             }
         }
-        
-        self.db.collection("conversations/\(docID)/messages").document().setData([
-            "message": message,
-            "sender": senderEmail,
-            "date": Date()
-        ])
+        insertMessage(with: docID, for: senderEmail, with: message)
     }
     
     // Sending a message
@@ -102,6 +105,7 @@ class DatabaseManager {
                     for doc in querySnapshot!.documents {
                         print("conversation with id: \(doc.documentID)")
                         // update fields to represent latest message sent
+//                      // TODO: call insertNewMessage for this task
                         self.db.collection("conversations").document(doc.documentID).setData([
                             "participants": [senderEmail, recipentEmail],
                             "sendDate": Date(),
@@ -111,12 +115,7 @@ class DatabaseManager {
                             "isRead": false
                         ])
                         
-                        
-                        self.db.collection("conversations/\(doc.documentID)/messages").document().setData([
-                            "message": message,
-                            "sender": senderEmail,
-                            "date": Date()
-                        ])
+                        self.insertMessage(with: "\(doc.documentID)", for: senderEmail, with: message)
                     }
                 }
         }
@@ -136,24 +135,25 @@ class DatabaseManager {
                 let timestamp: Timestamp = (doc.data() as AnyObject).value(forKey: "sendDate")! as! Timestamp
                 let requestedDate = timestamp.dateValue()
                 
-                guard let recipientEmail = doc.data()["recipientEmail"],
-                    let message = doc.data()["message"],
-                    let recipientName = doc.data()["recipientName"] else {
+                guard let recipientEmail = doc.data()["recipientEmail"] as? String,
+                    let message = doc.data()["message"] as? String,
+                    let recipientName = doc.data()["recipientName"] as? String else {
                     return nil
                 }
                 let latestMessageObject = LatestMessage(date: requestedDate,
-                                                        message: message as! String,
+                                                        message: message,
                                                         isRead: false)
                 
                 return Conversation(id: conversationId,
-                                    name: recipientName as! String,
-                                    otherUserEmail: recipientEmail as! String,
+                                    name: recipientName,
+                                    otherUserEmail: recipientEmail,
                                     latestMessage: latestMessageObject)
             })
             completion(.success(conversations))
         }
     }
     
+    // Retrieving all users from database for search results
     public func getAllUsers(completion: @escaping (Result<[[String: String]], Error>) -> Void) {
         db.collection("users").addSnapshotListener { (querySnapshot, error) in
             if let e = error {
@@ -171,36 +171,5 @@ class DatabaseManager {
             }
         }
     }
-    
-    
-//    public func getConversations(for email: String, completion: @escaping (Result<[Conversation], Error>) -> Void) {
-//        db.collection("conversations").whereField("participants", arrayContains: [email]).addSnapshotListener { querySnapshot, error in
-//            guard let value = querySnapshot?.documents else{
-//                completion(.failure(error!))
-//                return
-//            }
-//
-//            let conversations: [Conversation] = value.compactMap({ dictionary in
-//                guard let conversationId = dictionary["id"] as? String,
-//                    let name = dictionary["name"] as? String,
-//                    let otherUserEmail = dictionary["other_user_email"] as? String,
-//                    let latestMessage = dictionary["latest_message"] as? [String: Any],
-//                    let message = latestMessage["message"] as? String,
-//                    let isRead = latestMessage["is_read"] as? Bool else {
-//                        return nil
-//                }
-//
-//                let latestMmessageObject = LatestMessage(date: Date(),
-//                                                         message: message,
-//                                                         isRead: isRead)
-//                return Conversation(id: conversationId,
-//                                    name: name,
-//                                    otherUserEmail: otherUserEmail,
-//                                    latestMessage: latestMmessageObject)
-//            })
-//
-//            completion(.success(conversations))
-//        }
-//    }
 }
 
