@@ -50,26 +50,18 @@ class ChatViewController: MessagesViewController {
         messagesCollectionView.messagesLayoutDelegate = self
         messagesCollectionView.messagesDisplayDelegate = self
         messageInputBar.delegate = self
-
-        // The table view is going to look at its self when loading data
-//        tableView.dataSource = self
-        
-//        loadMessages()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         messageInputBar.inputTextView.becomeFirstResponder()
         if let conversationID = conversationId {
-            print("listening for messages")
             listenForMessages(id: conversationID, shouldScrollToBottom: true)
         }
     }
     
     private func listenForMessages(id: String, shouldScrollToBottom: Bool) {
-        print("current messages: \(messages)")
         DatabaseManager().getAllMessagesForConversation(with: id, completion: { result in
-            print("listening for messages with id: \(id)")
             
             switch result {
             case .success(let messages):

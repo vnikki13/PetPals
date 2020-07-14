@@ -21,3 +21,8 @@ struct Sender: SenderType {
     var displayName: String
 }
 
+struct SearchResult {
+    let name: String
+    let email: String
+}
+

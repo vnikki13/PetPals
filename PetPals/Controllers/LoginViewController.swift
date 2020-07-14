@@ -34,6 +34,7 @@ class LoginViewController: UIViewController {
                                 return
                             }
                             
+                            UserDefaults.standard.set(email, forKey: "email")
                             UserDefaults.standard.set(firstName, forKey: "firstName")
                             print("loged in as \(firstName), with email: \(email)")
                             

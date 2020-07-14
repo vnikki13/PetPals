@@ -32,6 +32,8 @@ class DatabaseManager {
                 completion(false)
             } else {
                 print("Successfully authenticated \(user.email)")
+                
+                UserDefaults.standard.set(user.email, forKey: "email")
                 UserDefaults.standard.set("\(user.firstName)", forKey: "firstName")
                 completion(true)
             }
@@ -67,61 +69,6 @@ class DatabaseManager {
         })
     }
     
-    
-//    // Get recipient name
-//    func getRecipientName(with email: String) -> String {
-//        let docRef = db.collection("users").document(email)
-//        var name = String()
-//        docRef.getDocument{ (document, error ) in
-//            if let document = document, document.exists {
-//                let dataDescription = document.data()
-//                let userName = dataDescription!["firstName"] as! String
-//                name = userName
-//            } else {
-//                print("Document does not exist")
-//                name = "unknown"
-//            }
-//        }
-//        return name
-//    }
-    
-    // Adding a message to the messages collection for a specific ID
-//    func insertMessage(to docID: String,
-//                       for sender: String,
-//                       with text: String) {
-//        
-//        self.db.collection("conversations/\(docID)/messages").document().setData([
-//            "message": text,
-//            "sender": sender,
-//            "date": Date()
-//        ])
-//    }
-    
-    // Starting a new conversation
-//    func insertNewConversation(from senderEmail: String,
-//                               to recipientEmail: String,
-//                               aka recipientName: String,
-//                               message: String) {
-//        
-//        let docID = "\(senderEmail)_\(recipientEmail)"
-//        db.collection("conversations").document(docID).setData([
-//            "participants": [senderEmail, recipientEmail],
-//            "sendDate": Date(),
-//            "message": message,
-//            "recipientEmail": recipientEmail,
-//            "recipientName": recipientName,
-//            "isRead": false
-//            
-//        ]) { (error) in
-//            if let e = error {
-//                print("There was an issue saving to the database: \(e)")
-//            } else {
-//                print("Created new convo and saved message to database")
-//            }
-//        }
-//        insertMessage(to: docID, for: senderEmail, with: message)
-//    }
-    
     // Sending a message
     func sendMessage(from senderEmail: String,
                      to recipientEmail: String,
@@ -148,7 +95,7 @@ class DatabaseManager {
             if let err = err {
                 print("Error writing to document: \(err)")
             } else {
-                print("Document successfully written!")
+                print("Document written to users/\(senderEmail)/conversations!")
             }
         }
         
@@ -178,7 +125,7 @@ class DatabaseManager {
             if let err = err {
                 print("Error writing to document: \(err)")
             } else {
-                print("Document successfully written!")
+                print("Document written to users/\(recipientEmail)/conversations!")
             }
         }
     }
@@ -264,13 +211,11 @@ class DatabaseManager {
                 let sender = Sender(senderId: senderEmail,
                                     displayName: senderName)
                 
-                print("return messages")
                 return Message(sender: sender,
                         messageId: doc.documentID,
                         sentDate: Date(),
                         kind: .text(message))
             })
-            print(messages)
             completion(.success(messages))
         }
     }

@@ -6,6 +6,7 @@ target 'PetPals' do
   # Pods for PetPals
   pod 'Firebase/Auth'
   pod 'Firebase/Firestore'
+  pod 'FirebaseUI'
 
   # Pods for Messaging UI
   pod 'MessageKit'
