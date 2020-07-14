@@ -7,9 +7,17 @@
 //
 
 import Foundation
+import MessageKit
 
-struct Message {
-    let sender: String
-    let body: String
-    let sendDate: Date
+struct Message: MessageType {
+    var sender: SenderType
+    var messageId: String
+    var sentDate: Date
+    var kind: MessageKind
 }
+
+struct Sender: SenderType {
+    var senderId: String
+    var displayName: String
+}
+

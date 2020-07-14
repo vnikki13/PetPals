@@ -26,7 +26,22 @@ class LoginViewController: UIViewController {
                     // TODO: create a label or popup for the user
                     print(error.localizedDescription)
                 } else {
-                    print("success")
+                    DatabaseManager().getDataFor(email: email, completion: {result in
+                        switch result {
+                        case .success(let data):
+                            guard let firstName = data as? String else {
+                                print(data)
+                                return
+                            }
+                            
+                            UserDefaults.standard.set(firstName, forKey: "firstName")
+                            print("loged in as \(firstName), with email: \(email)")
+                            
+                        case .failure(let error):
+                            print("Failed to read data with error \(error)")
+                        }
+                    })
+                    
                     self.performSegue(withIdentifier: K.loginSegue, sender: self)
                 }
             }

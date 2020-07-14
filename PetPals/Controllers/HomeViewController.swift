@@ -20,6 +20,9 @@ class HomeViewController: UIViewController {
     @IBAction func logOutPressed(_ sender: UIBarButtonItem) {
         do {
             try Auth.auth().signOut()
+            UserDefaults.standard.set(nil, forKey: "firstName")
+            UserDefaults.standard.set(nil, forKey: "email")
+            
             navigationController?.popToRootViewController(animated: true)
         } catch let signOutError as NSError {
           print ("Error signing out: %@", signOutError)

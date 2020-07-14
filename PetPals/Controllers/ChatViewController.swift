@@ -16,19 +16,26 @@ class ChatViewController: MessagesViewController {
     let db = Firestore.firestore()
     
     public let recipientEmail: String
+    public let recipientName: String
     private var conversationId: String?
     public var isNewConversation = false
     
-    var messages = [MessageType]()
+    var messages = [Message]()
     
-    public struct Sender: SenderType {
-        public let senderId: String
-        public let displayName: String
+    public var currentUser: Sender? {
+        guard let email = Auth.auth().currentUser?.email else {
+            return nil
+        }
+        
+        return Sender(senderId: email, displayName: "Me")
     }
     
-    init(with email: String, id: String?) {
+    
+    
+    init(email: String, id: String?, name: String) {
         self.conversationId = id
         self.recipientEmail = email
+        self.recipientName = name
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -53,6 +60,35 @@ class ChatViewController: MessagesViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         messageInputBar.inputTextView.becomeFirstResponder()
+        if let conversationID = conversationId {
+            print("listening for messages")
+            listenForMessages(id: conversationID, shouldScrollToBottom: true)
+        }
+    }
+    
+    private func listenForMessages(id: String, shouldScrollToBottom: Bool) {
+        print("current messages: \(messages)")
+        DatabaseManager().getAllMessagesForConversation(with: id, completion: { result in
+            print("listening for messages with id: \(id)")
+            
+            switch result {
+            case .success(let messages):
+                guard !messages.isEmpty else {
+                    return
+                }
+                self.messages = messages
+                
+                DispatchQueue.main.async {
+                    self.messagesCollectionView.reloadDataAndKeepOffset()
+                    if shouldScrollToBottom {
+                        self.messagesCollectionView.scrollToBottom()
+                    }
+                }
+                
+            case .failure(let error):
+                print("failed to get messages: \(error)")
+            }
+        })
     }
 }
 
@@ -64,36 +100,18 @@ extension ChatViewController: InputBarAccessoryViewDelegate {
         }
         
         print("Sending message: \(message)")
-        
-        
-        DatabaseManager().sendMessage(from: senderEmail, to: recipientEmail, with: message)
-//        db.collection("conversations")
-//            .whereField("participants", in: [[senderEmail, recipentEmail], [recipentEmail, senderEmail]])
-//            .getDocuments() { (querySnapshot, err) in
-//                
-//                if querySnapshot!.isEmpty {
-//                    // Start a new conversation
-//                    print("no known conversations, starting a new one")
-//                    DatabaseManager().insertNewConversation(with: senderEmail, and: recipentEmail)
-//                } else {
-//                    // Continue on with conversation
-//                    for doc in querySnapshot!.documents {
-//                        print("conversation with id: \(doc.documentID) exists")
-//                        self.db.collection("conversations/\(doc.documentID)/messages").document().setData([
-//                            "body": text,
-//                            "sender": senderEmail
-//                        ])
-//                    }
-//                }
-//        }
+        DatabaseManager().sendMessage(from: senderEmail, to: recipientEmail, aka: recipientName, with: message)
     }
 }
 
 extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, MessagesDisplayDelegate {
     
     func currentSender() -> SenderType {
-        return Sender(senderId: "\(Date())", displayName: title!)
-        
+        if let sender = currentUser {
+            return sender
+        }
+         
+        fatalError("Current user email is nil, email should be cached")
     }
     
     func messageForItem(at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> MessageType {
@@ -104,62 +122,6 @@ extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, Messag
         return messages.count
     }
     
-    
 }
-    
-//    func loadMessages() {
-//
-//        db.collection(K.FStore.collectionName)
-//            .order(by: K.FStore.dateField)
-//            .addSnapshotListener { (querySnapshot, error) in
-//
-//            self.messages = []
-//
-//            if let e = error {
-//                print("There was an issue retieving data from Firestore: \(e)")
-//            } else {
-//                if let snapshotDocs = querySnapshot?.documents {
-//                    for doc in snapshotDocs {
-//                        let data = doc.data()
-//                        if let sender = data[K.FStore.senderField] as? String, let messageBody = data[K.FStore.bodyField] as? String {
-//                            let newMessage = Message.init(sender: sender, body: messageBody)
-//                            self.messages.append(newMessage)
-//
-//                            // Good practice to use this method to reload a view
-//                            DispatchQueue.main.async {
-//                                self.tableView.reloadData()
-//                                let indexPath = IndexPath(row: self.messages.count - 1, section: 0)
-//                                self.tableView.scrollToRow(at: indexPath, at: .top, animated: true)
-//                            }
-//                        }
-//                    }
-//                }
-//            }
-//        }
-//    }
-//
-//}
 
-// DataSource is responsible for populating the table with data
-//extension ChatViewController: UITableViewDataSource {
-//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return messages.count
-//    }
-//
-//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let message = messages[indexPath.row]
-//
-//        let cell = tableView.dequeueReusableCell(withIdentifier: K.cellIdentifier, for: indexPath)
-//        cell.textLabel?.text = messages[indexPath.row].body
-//
-//        // Current user logged in
-//        if message.sender == Auth.auth().currentUser?.email {
-//            cell.backgroundColor = .red
-//        } else {
-//            cell.backgroundColor = .green
-//        }
-//
-//
-//        return cell
-//    }
-//}
+

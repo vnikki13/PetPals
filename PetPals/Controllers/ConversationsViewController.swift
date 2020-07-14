@@ -88,7 +88,6 @@ class ConversationsViewController: UIViewController {
     }
     
     @objc private func didTapComposeButton() {
-//         Want to show newConversation controller
         let vc = NewConversationViewController()
         vc.completion = { [weak self] result in
             print("these are the results of selecting a user")
@@ -105,7 +104,9 @@ class ConversationsViewController: UIViewController {
         guard let name = result["name"], let email = result["email"] else {
             return
         }
-        var vc = ChatViewController(with: email, id: name)
+        print("creating new conversation with this name")
+        print(name)
+        let vc = ChatViewController(email: email, id: nil, name: name)
         vc.isNewConversation = true
         vc.title = name
         vc.navigationItem.largeTitleDisplayMode = .never
@@ -118,8 +119,8 @@ class ConversationsViewController: UIViewController {
             print("Couldn't find email")
             return
         }
-        print("called get conversations")
         DatabaseManager().getAllConversations(for: email, completion: { result in
+            print(result)
             switch result {
             case .success(let conversations):
                 guard !conversations.isEmpty else {
@@ -143,30 +144,30 @@ class ConversationsViewController: UIViewController {
     }
     
     
-    func getUsers() {
-        db.collection("users").addSnapshotListener { (querySnapshot, error) in
-
-            self.userNames = []
-
-            if let e = error {
-                print("There was an issue retieving data from Firestore: \(e)")
-            } else {
-                if let snapshotDocs = querySnapshot?.documents {
-                    for doc in snapshotDocs {
-                        let data = doc.data()
-                        if let name = data["firstName"] as? String, let email = data["email"] as? String {
-                            self.userNames.append(name)
-                            self.userEmails.append(email)
-                            // Reload view
-                            DispatchQueue.main.async {
-                                self.tableView.reloadData()
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
+//    func getUsers() {
+//        db.collection("users").addSnapshotListener { (querySnapshot, error) in
+//
+//            self.userNames = []
+//
+//            if let e = error {
+//                print("There was an issue retieving data from Firestore: \(e)")
+//            } else {
+//                if let snapshotDocs = querySnapshot?.documents {
+//                    for doc in snapshotDocs {
+//                        let data = doc.data()
+//                        if let name = data["firstName"] as? String, let email = data["email"] as? String {
+//                            self.userNames.append(name)
+//                            self.userEmails.append(email)
+//                            // Reload view
+//                            DispatchQueue.main.async {
+//                                self.tableView.reloadData()
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//    }
 }
 
 // 3: Make some data with DataSource
@@ -198,7 +199,8 @@ extension ConversationsViewController: UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
         let model = conversations[indexPath.row]
         
-        let vc = ChatViewController(with: model.otherUserEmail, id: model.id)
+        let vc = ChatViewController(email: model.otherUserEmail, id: model.id, name: model.name)
+        vc.title = model.name
         vc.navigationItem.largeTitleDisplayMode = .never
         navigationController?.pushViewController(vc, animated: true)
  
