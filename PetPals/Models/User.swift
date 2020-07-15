@@ -6,10 +6,16 @@
 //  Copyright © 2020 Nikki Vaughan. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 struct User {
     let firstName: String
     let lastName: String
     let email: String
+}
+
+struct Dog {
+    let name: String
+    let aboutMe: String
+    let age: Int
 }

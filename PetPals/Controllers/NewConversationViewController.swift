@@ -122,11 +122,9 @@ extension NewConversationViewController: UISearchBarDelegate {
             return
         }
         
-        // clear keyboard
+        // clear keyboard and searh bar text
         searchBar.resignFirstResponder()
-        
-        // clear search bar text
-        results.removeAll()
+        searchBar.text = nil
 
         // search for users
         self.searchUsers(query: text)

@@ -56,5 +56,13 @@
 		<string>UIInterfaceOrientationPortrait</string>
 		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 	</array>
+	<key>NSCameraUsageDescription</key>
+	<string>Please allow access to take a photo</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Please allow access to select a photo</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>App will uplaod photos for dog profile images</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>App willl share your location with other users</string>
 </dict>
 </plist>

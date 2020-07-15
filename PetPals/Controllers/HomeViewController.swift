@@ -11,23 +11,23 @@ import Firebase
 
 class HomeViewController: UIViewController {
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        validateAuth()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         navigationItem.hidesBackButton = true
     }
     
-    @IBAction func logOutPressed(_ sender: UIBarButtonItem) {
-        do {
-            try Auth.auth().signOut()
-            UserDefaults.standard.set(nil, forKey: "firstName")
-            UserDefaults.standard.set(nil, forKey: "email")
-            
-            navigationController?.popToRootViewController(animated: true)
-        } catch let signOutError as NSError {
-          print ("Error signing out: %@", signOutError)
+    private func validateAuth() {
+        if Auth.auth().currentUser == nil {
+            print("trying to perform seque")
+            performSegue(withIdentifier: "HomeToLogin", sender: self)
+            tabBarController?.hidesBottomBarWhenPushed = true
         }
-          
     }
     
 }

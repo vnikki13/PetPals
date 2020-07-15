@@ -19,18 +19,22 @@ class LoginViewController: UIViewController {
 
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: false)
+    }
+    
     @IBAction func loginButtonPressed(_ sender: UIButton) {
         if let email = emailTextField.text, let password = passwordTextField.text {
             Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
                 if let error = error {
-                    // TODO: create a label or popup for the user
-                    print(error.localizedDescription)
+                    // Alert label for the user
+                    self.alertUserLoginError(with: error.localizedDescription)
                 } else {
                     DatabaseManager().getDataFor(email: email, completion: {result in
                         switch result {
                         case .success(let data):
                             guard let firstName = data as? String else {
-                                print(data)
                                 return
                             }
                             
@@ -47,6 +51,18 @@ class LoginViewController: UIViewController {
                 }
             }
         }
+    }
+    
+    func alertUserLoginError(with message: String) {
+        let alert = UIAlertController(title: "Woops",
+                                      message: message,
+                                      preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "Dismiss",
+                                      style: .cancel,
+                                      handler: nil))
+        
+        present(alert, animated: true)
     }
     
 }

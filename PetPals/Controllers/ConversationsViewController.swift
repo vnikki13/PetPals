@@ -165,6 +165,7 @@ extension ConversationsViewController: UITableViewDataSource {
                                                  for: indexPath) as! ConversationTableViewCell
         // TODO: make sure users are not nil
         cell.configure(with: model)
+        cell.accessoryType = .disclosureIndicator
         return cell
     }
     

@@ -20,23 +20,34 @@ class RegisterViewController: UIViewController {
         super.viewDidLoad()
 
     }
-
-    @IBAction func registerButtonPressed(_ sender: UIButton) {
+    
+    
+    @IBAction func addDogInfoPressed(_ sender: UIButton) {
         
-        if let firstName = firstNameTextField.text, let lastName = lastNameTextField.text, let email = emailTextField.text, let password = passwordTextField.text {
-            
-            let newUser = User(firstName: firstName, lastName: lastName, email: email)
-            
-            DatabaseManager().authenticateNewUser(newUser, with: password, completion: { success in
-                if success {
-                    DatabaseManager().insertNewUser(newUser)
-                    self.performSegue(withIdentifier: K.registerSegue, sender: self)
-                } else {
-                    // TODO: create check for email and password fields and alert user of error
-                    print("Unable to create account")
-                }
-            })
-
+        guard let firstName = firstNameTextField.text, let lastName = lastNameTextField.text, let email = emailTextField.text, let password = passwordTextField.text else {
+            // TODO: create check for email and password fields and alert user of error
+            print("invalid register info")
+            return
         }
+        
+        let newUser = User(firstName: firstName, lastName: lastName, email: email)
+        
+        // TODO: Uncomment after register process is setup
+        self.performSegue(withIdentifier: "RegisterToDogInfo", sender: self)
+        
+        
+//        DatabaseManager().authenticateNewUser(newUser, with: password, completion: { success in
+//            if success {
+//
+//                DatabaseManager().insertNewUser(newUser)
+//
+//                self.performSegue(withIdentifier: "RegisterToDogInfo", sender: self)
+//
+//            } else {
+//                // TODO: create check for email and password fields and alert user of error
+//                print("Unable to create account")
+//            }
+//        })
+        
     }
 }

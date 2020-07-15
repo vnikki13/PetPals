@@ -92,6 +92,7 @@ extension ChatViewController: InputBarAccessoryViewDelegate {
         }
         
         print("Sending message: \(message)")
+        messageInputBar.inputTextView.text = nil
         DatabaseManager().sendMessage(from: senderEmail, to: recipientEmail, aka: recipientName, with: message)
     }
 }
