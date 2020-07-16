@@ -14,7 +14,12 @@ class DogBioViewController: UIViewController {
 
     @IBOutlet weak var image1View: UIImageView!
 
+    var dogName: String?
+    var age: String?
+    var aboutMe: String?
+    var imagesList = [UIImage]()
     
+    @IBOutlet weak var aboutMeTextField: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,27 +39,59 @@ class DogBioViewController: UIViewController {
     }
     
     @IBAction func registerButtonTapeed(_ sender: UIButton) {
-        // only uploading image
-        guard let image = image1View.image, let data = image.pngData() else {
+        aboutMe = aboutMeTextField.text
+        
+        
+        
+        let imagesListData: [Data] = imagesList.map( { image in
+            image.pngData()!
+        })
+        
+        guard let useremail = Auth.auth().currentUser?.email else {
             return
         }
         
-        let useremail = Auth.auth().currentUser?.email
-        let filename = "\(useremail!)_profile_picture.png"
-        StorageManager.shared.uploadProfilePicture(with: data, filename: filename, completion: { result in
-            switch result {
-            case .success(let downlaodUrl):
-                UserDefaults.standard.set(downlaodUrl, forKey: "profile_picture_url")
-                print(downlaodUrl)
-            case .failure(let error):
-                print("Storage manager error: \(error)")
-            }
-        })
+        let imageGroup = DispatchGroup()
+        var urls = [String]()
+        var count = 0
+        for image in imagesListData {
+            count += 1
+            let filename = "\(useremail)/photo_\(count).png"
+            print("entered group")
+            imageGroup.enter()
+            StorageManager.shared.uploadPicture(with: image, filename: filename, completion: { result in
+                switch result {
+                case .success(let downlaodUrl):
+                    urls.append(downlaodUrl)
+                case .failure(let error):
+                    print("Storage manager error: \(error)")
+                }
+                imageGroup.leave()
+                print("left group")
+            })
+            
+        }
         
-        let vc = HomeViewController()
-        vc.title = "Home"
-        vc.navigationItem.largeTitleDisplayMode = .never
-        navigationController?.pushViewController(vc, animated: true)
+        imageGroup.notify(queue: DispatchQueue.main) {
+            print(urls)
+            UserDefaults.standard.set(urls, forKey: "images")
+            
+            guard let name = self.dogName,
+                let about = self.aboutMe,
+                let age = self.age else {
+                return
+            }
+            
+            let newDog = Dog(name: name,
+                             aboutMe: about,
+                             age: age,
+                             photos: urls
+            )
+            
+            DatabaseManager().insertNewDog(with: newDog)
+            
+            self.performSegue(withIdentifier: "RegisterToHome", sender: self)
+        }
     }
 }
 
@@ -67,6 +104,7 @@ extension DogBioViewController: ImagePickerDelegate {
         print("done was pressed")
         print(images)
         
+        imagesList = images
         image1View.image = images[0]
         imagePicker.dismiss(animated: true, completion: nil)
     }
@@ -76,28 +114,4 @@ extension DogBioViewController: ImagePickerDelegate {
         print("cancel was pressed")
     }
     
-    
 }
-
-//extension DogBioViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-//    func presentCamera() {
-//        let vc = UIImagePickerController()
-//        vc.delegate = self
-//        present(vc, animated: true, completion: nil)
-//    }
-//
-//    func presentPhotoPicker() {
-//        let vc = UIImagePickerController()
-//        vc.sourceType = .photoLibrary
-//        vc.delegate = self
-//        present(vc, animated: true)
-//    }
-    
-//    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-//
-//    }
-//
-//    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-//
-//    }
-//}

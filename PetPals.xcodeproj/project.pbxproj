@@ -22,6 +22,9 @@
 		A11C4E2524BE274C0059D51E /* DogBioViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11C4E2424BE274C0059D51E /* DogBioViewController.swift */; };
 		A11C4E2824BE73980059D51E /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11C4E2724BE73980059D51E /* StorageManager.swift */; };
 		A11C4E2A24BE84220059D51E /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11C4E2924BE84220059D51E /* ProfileViewController.swift */; };
+		A1452C4C24BF6CEB00D1EFD4 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1452C4B24BF6CEB00D1EFD4 /* MainTabBarController.swift */; };
+		A1452C4E24BFC67700D1EFD4 /* DogTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1452C4D24BFC67700D1EFD4 /* DogTableViewCell.swift */; };
+		A1452C5024BFD47600D1EFD4 /* DetailsPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1452C4F24BFD47600D1EFD4 /* DetailsPageViewController.swift */; };
 		A15F8B9124BBFAD3007E47B0 /* NewConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15F8B9024BBFAD3007E47B0 /* NewConversationViewController.swift */; };
 		A164807A24BD673900A2953E /* NewConversationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A164807924BD673900A2953E /* NewConversationCell.swift */; };
 		A1E1E2AD24BA09DD00879BD8 /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E1E2AC24BA09DD00879BD8 /* DatabaseManager.swift */; };
@@ -56,6 +59,9 @@
 		A11C4E2424BE274C0059D51E /* DogBioViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogBioViewController.swift; sourceTree = "<group>"; };
 		A11C4E2724BE73980059D51E /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		A11C4E2924BE84220059D51E /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		A1452C4B24BF6CEB00D1EFD4 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
+		A1452C4D24BFC67700D1EFD4 /* DogTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogTableViewCell.swift; sourceTree = "<group>"; };
+		A1452C4F24BFD47600D1EFD4 /* DetailsPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsPageViewController.swift; sourceTree = "<group>"; };
 		A15F8B9024BBFAD3007E47B0 /* NewConversationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewConversationViewController.swift; sourceTree = "<group>"; };
 		A164807924BD673900A2953E /* NewConversationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewConversationCell.swift; sourceTree = "<group>"; };
 		A1E1E2AC24BA09DD00879BD8 /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
@@ -154,6 +160,7 @@
 				A115E5A524B79B4000AEC483 /* LaunchScreen.storyboard */,
 				A1E1E2B024BB7E5F00879BD8 /* ConversationTableViewCell.swift */,
 				A164807924BD673900A2953E /* NewConversationCell.swift */,
+				A1452C4D24BFC67700D1EFD4 /* DogTableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -171,6 +178,8 @@
 				A11C4E2224BE273C0059D51E /* DogInfoViewController.swift */,
 				A11C4E2424BE274C0059D51E /* DogBioViewController.swift */,
 				A11C4E2924BE84220059D51E /* ProfileViewController.swift */,
+				A1452C4B24BF6CEB00D1EFD4 /* MainTabBarController.swift */,
+				A1452C4F24BFD47600D1EFD4 /* DetailsPageViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -297,6 +306,7 @@
 				A11C4E2824BE73980059D51E /* StorageManager.swift in Sources */,
 				A1E3BCAC24B7CF48000E5041 /* ConversationsViewController.swift in Sources */,
 				A1E1E2B724BB849A00879BD8 /* Conversation.swift in Sources */,
+				A1452C4C24BF6CEB00D1EFD4 /* MainTabBarController.swift in Sources */,
 				A11C4E2A24BE84220059D51E /* ProfileViewController.swift in Sources */,
 				A115E59B24B79B3E00AEC483 /* AppDelegate.swift in Sources */,
 				A115E59D24B79B3E00AEC483 /* SceneDelegate.swift in Sources */,
@@ -304,8 +314,10 @@
 				A1E3BCAA24B7C7F4000E5041 /* Message.swift in Sources */,
 				A1E3BCA624B7BC34000E5041 /* ChatViewController.swift in Sources */,
 				A115E5B824B7AE7800AEC483 /* RegisterViewController.swift in Sources */,
+				A1452C4E24BFC67700D1EFD4 /* DogTableViewCell.swift in Sources */,
 				A1E1E2AF24BA0A1B00879BD8 /* User.swift in Sources */,
 				A1E1E2B124BB7E5F00879BD8 /* ConversationTableViewCell.swift in Sources */,
+				A1452C5024BFD47600D1EFD4 /* DetailsPageViewController.swift in Sources */,
 				A11C4E2324BE273C0059D51E /* DogInfoViewController.swift in Sources */,
 				A115E5B624B7AE6900AEC483 /* LoginViewController.swift in Sources */,
 				A15F8B9124BBFAD3007E47B0 /* NewConversationViewController.swift in Sources */,

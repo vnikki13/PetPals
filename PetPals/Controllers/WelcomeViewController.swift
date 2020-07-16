@@ -19,11 +19,17 @@ class WelcomeViewController: UIViewController {
         super.viewWillDisappear(animated)
         navigationController?.isNavigationBarHidden = false
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
     }
 
+    @IBAction func unwindToWelcome(_ unwindSegue: UIStoryboardSegue) {
+        let sourceViewController = unwindSegue.source
+        // Use data from the view controller which initiated the unwind segue
+        navigationController?.popToViewController(self, animated: false)
+    }
 
 }
 

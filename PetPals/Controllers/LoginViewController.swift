@@ -14,6 +14,12 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tabBarController?.hidesBottomBarWhenPushed = true
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

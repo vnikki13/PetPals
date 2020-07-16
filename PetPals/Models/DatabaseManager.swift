@@ -8,6 +8,7 @@
 
 import Foundation
 import Firebase
+import FirebaseStorage
 
 class DatabaseManager {
     
@@ -53,6 +54,36 @@ class DatabaseManager {
         }
     }
     
+    // Adding a new dog to current user collection
+    func insertNewDog(with dog: Dog) {
+        guard let currentUser = Auth.auth().currentUser?.email else {
+            return
+        }
+        
+        // inserting dog to current user profile
+        db.collection("users/\(currentUser)/dogs").document().setData([
+            "name": dog.name,
+            "age": dog.age,
+            "bio": dog.aboutMe,
+            "photos": dog.photos
+        ], merge: false, completion: { err in
+            if let err = err?.localizedDescription {
+                print("Error adding Document: \(err)")
+            } else {
+                print("\(dog.name) added to \(currentUser) dog collection")
+            }
+        })
+        
+        // inserting dog to list of all dogs
+        db.collection("dogs").document("\(currentUser)_\(dog.name)").setData([
+            "name": dog.name,
+            "age": dog.age,
+            "bio": dog.aboutMe,
+            "photos": dog.photos
+        ])
+        print("done inserting new dog")
+    }
+    
     // Adding a new user to the User collection
     func insertNewUser(_ user: User) {
         db.collection("users").document(user.email).setData([
@@ -63,7 +94,6 @@ class DatabaseManager {
             if let err = err?.localizedDescription {
                 print("Error adding Document: \(err)")
             } else {
-                
                 print("\(user.email) added to users collection")
             }
         })
@@ -132,6 +162,7 @@ class DatabaseManager {
     
     // Retrieve all conversations for current user
     public func getAllConversations(for email: String, completion: @escaping (Result<[Conversation], Error>) -> Void) {
+        
         db.collection("users/\(email)/conversations/").addSnapshotListener { (querySnapshot, err) in
             guard let documents = querySnapshot?.documents else {
                 print("Error fetching documents: \(err!)")
@@ -159,6 +190,33 @@ class DatabaseManager {
                                     latestMessage: latestMessageObject)
             })
             completion(.success(conversations))
+        }
+    }
+    
+    // Retrieving all dogs from database for search
+    public func getAllDogs(completion: @escaping (Result<[Dog], Error>) -> Void) {
+        db.collection("dogs").addSnapshotListener { (querySnapshot, error) in
+            if let e = error {
+                print("problem getting a list of all dogs")
+                completion(.failure(e))
+            } else {
+                if let snapshotDocs = querySnapshot?.documents {
+                    let dogInfo: [Dog] = snapshotDocs.map({ doc in
+                        let name = doc.data()["name"] as! String
+                        let age = doc.data()["age"] as! String
+                        let bio = doc.data()["bio"] as! String
+                        let photos = doc.data()["photos"] as! [Any]
+//
+//                        // TODO: download images from reference
+                        return Dog(name: name,
+                                   aboutMe: bio,
+                                   age: age,
+                                   photos: photos)
+                    })
+                    
+                    completion(.success(dogInfo))
+                }
+            }
         }
     }
     
