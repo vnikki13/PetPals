@@ -33,21 +33,21 @@ class RegisterViewController: UIViewController {
         let newUser = User(firstName: firstName, lastName: lastName, email: email)
         
         // TODO: Uncomment after register process is setup
-        self.performSegue(withIdentifier: "RegisterToDogInfo", sender: self)
+//        self.performSegue(withIdentifier: "RegisterToDogInfo", sender: self)
         
         
-//        DatabaseManager().authenticateNewUser(newUser, with: password, completion: { success in
-//            if success {
-//
-//                DatabaseManager().insertNewUser(newUser)
-//
-//                self.performSegue(withIdentifier: "RegisterToDogInfo", sender: self)
-//
-//            } else {
-//                // TODO: create check for email and password fields and alert user of error
-//                print("Unable to create account")
-//            }
-//        })
+        DatabaseManager().authenticateNewUser(newUser, with: password, completion: { success in
+            if success {
+
+                DatabaseManager().insertNewUser(newUser)
+
+                self.performSegue(withIdentifier: "RegisterToDogInfo", sender: self)
+
+            } else {
+                // TODO: create check for email and password fields and alert user of error
+                print("Unable to create account")
+            }
+        })
         
     }
 }

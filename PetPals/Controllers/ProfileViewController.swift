@@ -29,8 +29,7 @@ class ProfileViewController: UIViewController {
             return nil
         }
         
-        let filename = email + "_profile_picture.png"
-        let path = "images/" + filename
+        let path = "images/\(email)/photo_1.png"
         
         let headerView = UIView(frame: CGRect(x: 0,
                                         y: 0,

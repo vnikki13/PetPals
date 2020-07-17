@@ -18,5 +18,5 @@ struct Dog {
     let name: String
     let aboutMe: String
     let age: String
-    let photos: [Any]
+    let userEmail: String
 }

@@ -73,7 +73,6 @@ class DogBioViewController: UIViewController {
         }
         
         imageGroup.notify(queue: DispatchQueue.main) {
-            print(urls)
             UserDefaults.standard.set(urls, forKey: "images")
             
             guard let name = self.dogName,
@@ -85,8 +84,9 @@ class DogBioViewController: UIViewController {
             let newDog = Dog(name: name,
                              aboutMe: about,
                              age: age,
-                             photos: urls
+                             userEmail: useremail
             )
+            
             
             DatabaseManager().insertNewDog(with: newDog)
             

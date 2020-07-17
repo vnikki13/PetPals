@@ -67,6 +67,20 @@ class ConversationTableViewCell: UITableViewCell {
     public func configure(with model: Conversation) {
         userMessageLabel.text = model.latestMessage.message
         userNameLabel.text = model.name
+        
+        let path = "images/\(model.otherUserEmail)/photo_1.png"
+        StorageManager.shared.downloadURL(for: path, completion: { [weak self] result in
+            switch result {
+            case .success(let url):
+                DispatchQueue.main.async {
+
+                    self?.userImageView.sd_setImage(with: url, completed: nil)
+                }
+
+            case .failure(let error):
+                print("failed to get image url: \(error)")
+            }
+        })
     }
 
 }

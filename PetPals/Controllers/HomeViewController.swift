@@ -104,7 +104,7 @@ extension HomeViewController: UITableViewDelegate {
     }
 
     func openDetailsPage(_ model: Dog) {
-        let vc = DetailsPageViewController()
+        let vc = DetailsPageViewController(with: model)
         vc.title = model.name
         vc.navigationItem.largeTitleDisplayMode = .never
         navigationController?.pushViewController(vc, animated: true)

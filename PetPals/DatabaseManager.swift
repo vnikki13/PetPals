@@ -65,7 +65,6 @@ class DatabaseManager {
             "name": dog.name,
             "age": dog.age,
             "bio": dog.aboutMe,
-            "photos": dog.photos
         ], merge: false, completion: { err in
             if let err = err?.localizedDescription {
                 print("Error adding Document: \(err)")
@@ -79,7 +78,7 @@ class DatabaseManager {
             "name": dog.name,
             "age": dog.age,
             "bio": dog.aboutMe,
-            "photos": dog.photos
+            "userEmail": currentUser
         ])
         print("done inserting new dog")
     }
@@ -202,16 +201,16 @@ class DatabaseManager {
             } else {
                 if let snapshotDocs = querySnapshot?.documents {
                     let dogInfo: [Dog] = snapshotDocs.map({ doc in
+                        print(doc.data())
                         let name = doc.data()["name"] as! String
                         let age = doc.data()["age"] as! String
                         let bio = doc.data()["bio"] as! String
-                        let photos = doc.data()["photos"] as! [Any]
-//
-//                        // TODO: download images from reference
+                        let userEmail = doc.data()["userEmail"] as! String
+
                         return Dog(name: name,
                                    aboutMe: bio,
                                    age: age,
-                                   photos: photos)
+                                   userEmail: userEmail)
                     })
                     
                     completion(.success(dogInfo))
