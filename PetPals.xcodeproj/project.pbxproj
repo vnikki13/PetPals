@@ -206,11 +206,11 @@
 		A196969224C102D20098C871 /* Welcome */ = {
 			isa = PBXGroup;
 			children = (
+				A115E59E24B79B3E00AEC483 /* WelcomeViewController.swift */,
 				A11C4E2224BE273C0059D51E /* DogInfoViewController.swift */,
 				A11C4E2424BE274C0059D51E /* DogBioViewController.swift */,
 				A115E5B724B7AE7800AEC483 /* RegisterViewController.swift */,
 				A115E5B524B7AE6900AEC483 /* LoginViewController.swift */,
-				A115E59E24B79B3E00AEC483 /* WelcomeViewController.swift */,
 			);
 			path = Welcome;
 			sourceTree = "<group>";

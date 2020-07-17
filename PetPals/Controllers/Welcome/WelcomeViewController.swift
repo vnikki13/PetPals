@@ -7,28 +7,28 @@
 //
 
 import UIKit
+import Firebase
 
 class WelcomeViewController: UIViewController {
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        navigationController?.isNavigationBarHidden = true
-    }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        navigationController?.isNavigationBarHidden = false
+    override func viewWillAppear(_ animated: Bool) {
+        print("view will appear")
+        super.viewWillAppear(false)
+        validateAuth()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+    }
+    
+    private func validateAuth() {
+        print("validating user")
+        if Auth.auth().currentUser != nil {
+            performSegue(withIdentifier: "WelcomeToTabBar", sender: self)
+        }
     }
 
     @IBAction func unwindToWelcome(_ unwindSegue: UIStoryboardSegue) {
-        let sourceViewController = unwindSegue.source
-        // Use data from the view controller which initiated the unwind segue
-        navigationController?.popToViewController(self, animated: false)
     }
 
 }

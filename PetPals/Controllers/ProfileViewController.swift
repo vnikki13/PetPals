@@ -79,10 +79,7 @@ class ProfileViewController: UIViewController {
             UserDefaults.standard.set(nil, forKey: "firstName")
             UserDefaults.standard.set(nil, forKey: "email")
             
-            
-            
-//            navigationController?.popViewController(animated: false)
-            performSegue(withIdentifier: "ProfileToLogin", sender: self)
+            performSegue(withIdentifier: "UnwindToWelcome", sender: self)
         } catch let signOutError as NSError {
             print ("Error signing out: %@", signOutError)
         }
