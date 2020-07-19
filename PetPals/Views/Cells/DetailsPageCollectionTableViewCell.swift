@@ -19,10 +19,15 @@ class DetailsPageCollectionTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
-        layout.itemSize = CGSize(width: 270, height: 280)
-        layout.sectionInset = UIEdgeInsets(top: 3, left: 3, bottom: 3, right: 3)
+
+        // TODO: readjust image sizes 
+        let width = UIScreen.main.fixedCoordinateSpace.bounds.width
+        let height = UIScreen.main.fixedCoordinateSpace.bounds.height
         
+        layout.itemSize = CGSize(width: width, height: height)
         self.collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        
+ 
         
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
@@ -65,12 +70,8 @@ extension DetailsPageCollectionTableViewCell: UICollectionViewDelegate, UICollec
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let model = models[indexPath.row]
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DetailsPageTableCollectionViewCell.identifier, for: indexPath) as! DetailsPageTableCollectionViewCell
-        
+
         cell.configure(with: model)
         return cell
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        collectionView.deselectItem(at: indexPath, animated: true)
     }
 }

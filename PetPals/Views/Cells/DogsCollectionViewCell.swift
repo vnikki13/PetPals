@@ -29,8 +29,8 @@ class DogsCollectionViewCell: UICollectionViewCell {
     public func configure(with model: Dog) {
         nameLabel.text = model.name
         
-        print(model.userEmail)
         let path = "images/\(model.userEmail)/photo_1.png"
+        
         StorageManager.shared.downloadURL(for: path, completion: { [weak self] result in
             switch result {
             case .success(let url):

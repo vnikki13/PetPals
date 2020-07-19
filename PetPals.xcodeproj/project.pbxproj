@@ -15,7 +15,6 @@
 		A115E5A424B79B4000AEC483 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A115E5A324B79B4000AEC483 /* Assets.xcassets */; };
 		A115E5A724B79B4000AEC483 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A115E5A524B79B4000AEC483 /* LaunchScreen.storyboard */; };
 		A115E5AF24B7A0D200AEC483 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A115E5AE24B7A0D200AEC483 /* GoogleService-Info.plist */; };
-		A115E5B424B7AB6800AEC483 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A115E5B324B7AB6800AEC483 /* HomeViewController.swift */; };
 		A115E5B624B7AE6900AEC483 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A115E5B524B7AE6900AEC483 /* LoginViewController.swift */; };
 		A115E5B824B7AE7800AEC483 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A115E5B724B7AE7800AEC483 /* RegisterViewController.swift */; };
 		A11C4E2324BE273C0059D51E /* DogInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11C4E2224BE273C0059D51E /* DogInfoViewController.swift */; };
@@ -57,7 +56,6 @@
 		A115E5A624B79B4000AEC483 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A115E5A824B79B4000AEC483 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A115E5AE24B7A0D200AEC483 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		A115E5B324B7AB6800AEC483 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		A115E5B524B7AE6900AEC483 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		A115E5B724B7AE7800AEC483 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		A11C4E2224BE273C0059D51E /* DogInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogInfoViewController.swift; sourceTree = "<group>"; };
@@ -178,13 +176,12 @@
 			isa = PBXGroup;
 			children = (
 				A196969224C102D20098C871 /* Welcome */,
-				A115E5B324B7AB6800AEC483 /* HomeViewController.swift */,
-				A1E3BCAB24B7CF48000E5041 /* ConversationsViewController.swift */,
-				A1E3BCA524B7BC34000E5041 /* ChatViewController.swift */,
-				A15F8B9024BBFAD3007E47B0 /* NewConversationViewController.swift */,
-				A11C4E2924BE84220059D51E /* ProfileViewController.swift */,
 				A196968724C0C7FD0098C871 /* DogsViewController.swift */,
 				A196969324C106510098C871 /* DetailsPageViewController.swift */,
+				A1E3BCAB24B7CF48000E5041 /* ConversationsViewController.swift */,
+				A1E3BCA524B7BC34000E5041 /* ChatViewController.swift */,
+				A11C4E2924BE84220059D51E /* ProfileViewController.swift */,
+				A15F8B9024BBFAD3007E47B0 /* NewConversationViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -207,9 +204,9 @@
 			isa = PBXGroup;
 			children = (
 				A115E59E24B79B3E00AEC483 /* WelcomeViewController.swift */,
+				A115E5B724B7AE7800AEC483 /* RegisterViewController.swift */,
 				A11C4E2224BE273C0059D51E /* DogInfoViewController.swift */,
 				A11C4E2424BE274C0059D51E /* DogBioViewController.swift */,
-				A115E5B724B7AE7800AEC483 /* RegisterViewController.swift */,
 				A115E5B524B7AE6900AEC483 /* LoginViewController.swift */,
 			);
 			path = Welcome;
@@ -357,7 +354,6 @@
 				A115E5B624B7AE6900AEC483 /* LoginViewController.swift in Sources */,
 				A15F8B9124BBFAD3007E47B0 /* NewConversationViewController.swift in Sources */,
 				A11C4E2524BE274C0059D51E /* DogBioViewController.swift in Sources */,
-				A115E5B424B7AB6800AEC483 /* HomeViewController.swift in Sources */,
 				A196968F24C101DF0098C871 /* DetailsPageCollectionTableViewCell.swift in Sources */,
 				A1E3BCA824B7C3F4000E5041 /* Constants.swift in Sources */,
 				A1E1E2B324BB818400879BD8 /* Extensions.swift in Sources */,

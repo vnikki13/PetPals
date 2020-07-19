@@ -18,5 +18,8 @@ struct Dog {
     let name: String
     let aboutMe: String
     let age: String
+    let gender: String
+    let fixed: Bool
+    let pics: [String]
     let userEmail: String
 }

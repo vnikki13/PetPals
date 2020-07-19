@@ -22,7 +22,8 @@ class DetailsPageViewController: UIViewController {
     }
     
     private let table: UITableView = {
-        let table = UITableView(frame: .zero, style: .grouped)
+        let table = UITableView(frame: .zero, style: .plain)
+        table.separatorStyle = UITableViewCell.SeparatorStyle.none
         table.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         table.register(DetailsPageCollectionTableViewCell.self, forCellReuseIdentifier: DetailsPageCollectionTableViewCell.identifier)
         return table
@@ -33,6 +34,10 @@ class DetailsPageViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .compose,
+                                                            target: self,
+                                                            action: #selector(didTapComposeButton))
+        
         setUpModels()
         
         view.addSubview(table)
@@ -40,42 +45,51 @@ class DetailsPageViewController: UIViewController {
         table.dataSource = self
     }
     
+    @objc private func didTapComposeButton() {
+        DatabaseManager().getDataFor(email: dog.userEmail, completion: { result in
+            switch result {
+            case .success(let info):
+                guard let name = info as? String else {
+                    return
+                }
+                
+                let vc = ChatViewController(email: self.dog.userEmail, id: nil, name: name)
+                vc.title = name
+                vc.navigationItem.largeTitleDisplayMode = .never
+                self.navigationController?.pushViewController(vc, animated: true)
+                
+            case .failure(let error):
+                print("unable to find user: \(error)")
+                return
+            }
+            
+            
+        })
+    }
+    
     private func setUpModels() {
-        // TODO: save urls to each dogs profile in database
-        // Replace UserDefaults (which is the current logged in user)
-        // with dog.photos
         
-        let dogPics = UserDefaults.standard.value(forKey: "images") as! [String]
-        
-        let modelCollection = dogPics.map({ (pic: String) -> CollectionTableCellModel in
+        let modelCollection = dog.pics.sorted().map({ (pic: String) -> CollectionTableCellModel in
             return CollectionTableCellModel(imageName: pic)
         })
-
-        models.append(.collectionView(models: modelCollection, rows: 1))
         
-//        models.append(.collectionView(models: [
-//            CollectionTableCellModel(imageName: "Image"),
-//            CollectionTableCellModel(imageName: "Image"),
-//            CollectionTableCellModel(imageName: "Image"),
-//            CollectionTableCellModel(imageName: "Image"),
-//            CollectionTableCellModel(imageName: "Image"),
-//            CollectionTableCellModel(imageName: "Image"),
-//            CollectionTableCellModel(imageName: "Image")
-//        ], rows: 1))
+        self.models.append(.collectionView(models: modelCollection, rows: 1))
         
-        models.append(.list(models: [
-            ListCellModel(title: "First Thing"),
-            ListCellModel(title: "First Thing"),
-            ListCellModel(title: "First Thing"),
-            ListCellModel(title: "First Thing"),
-            ListCellModel(title: "First Thing")
+        self.models.append(.list(models: [
+            ListCellModel(title: self.dog.name),
+            ListCellModel(title: self.dog.age + " old"),
+            ListCellModel(title: self.dog.aboutMe),
         ]))
+        
+        
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         table.frame = view.bounds
     }
+    
+    
 
 }
 
@@ -99,6 +113,7 @@ extension DetailsPageViewController: UITableViewDelegate, UITableViewDataSource 
             let model = models[indexPath.row]
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
             cell.textLabel?.text = model.title
+            cell.isUserInteractionEnabled = false
             return cell
             
         case .collectionView(let models, _):
@@ -109,10 +124,6 @@ extension DetailsPageViewController: UITableViewDelegate, UITableViewDataSource 
         }
         
         
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

@@ -14,29 +14,17 @@ class DatabaseManager {
     
     let db = Firestore.firestore()
     
-//    // Date formater
-//    public let dateFormatter: DateFormatter = {
-//        let formattre = DateFormatter()
-//        formattre.dateStyle = .medium
-//        formattre.timeStyle = .long
-//        formattre.locale = .current
-//        print("returning formated date")
-//        return formattre
-//    }()
-    
     // Authenticating a new user
-    func authenticateNewUser(_ user: User, with password: String, completion: @escaping ((Bool) -> Void)) {
+    func authenticateNewUser(_ user: User, with password: String, completion: @escaping (Result<String, Error>) -> Void) {
         
         Auth.auth().createUser(withEmail: user.email, password: password) { authResult, error in
-            if let err = error?.localizedDescription {
-                print(err)
-                completion(false)
-            } else {
-                print("Successfully authenticated \(user.email)")
+            if let err = error {
+                completion(.failure(err))
                 
+            } else {
                 UserDefaults.standard.set(user.email, forKey: "email")
-                UserDefaults.standard.set("\(user.firstName)", forKey: "firstName")
-                completion(true)
+                UserDefaults.standard.set(user.firstName, forKey: "firstName")
+                completion(.success("Successfully authenticated \(user.email)"))
             }
         }
     }
@@ -64,7 +52,10 @@ class DatabaseManager {
         db.collection("users/\(currentUser)/dogs").document().setData([
             "name": dog.name,
             "age": dog.age,
+            "fixed": dog.fixed,
+            "gender": dog.gender,
             "bio": dog.aboutMe,
+            "pics": dog.pics
         ], merge: false, completion: { err in
             if let err = err?.localizedDescription {
                 print("Error adding Document: \(err)")
@@ -77,7 +68,10 @@ class DatabaseManager {
         db.collection("dogs").document("\(currentUser)_\(dog.name)").setData([
             "name": dog.name,
             "age": dog.age,
+            "fixed": dog.fixed,
+            "gender": dog.gender,
             "bio": dog.aboutMe,
+            "pics": dog.pics,
             "userEmail": currentUser
         ])
         print("done inserting new dog")
@@ -159,6 +153,17 @@ class DatabaseManager {
         }
     }
     
+    // Determines if a conversation between two users exists
+    public func conversationExists(for userEmail: String, with recipientEmail: String, completion: @escaping (String?) -> Void) {
+        db.collection("users/\(userEmail)/conversations").document("\(userEmail)_\(recipientEmail)").getDocument { (doc, error) in
+            if let doc = doc, doc.exists {
+                completion(doc.documentID)
+            } else {
+                completion(nil)
+            }
+        }
+    }
+    
     // Retrieve all conversations for current user
     public func getAllConversations(for email: String, completion: @escaping (Result<[Conversation], Error>) -> Void) {
         
@@ -192,7 +197,7 @@ class DatabaseManager {
         }
     }
     
-    // Retrieving all dogs from database for search
+    // Retrieving all dogs from database
     public func getAllDogs(completion: @escaping (Result<[Dog], Error>) -> Void) {
         db.collection("dogs").addSnapshotListener { (querySnapshot, error) in
             if let e = error {
@@ -204,12 +209,18 @@ class DatabaseManager {
                         print(doc.data())
                         let name = doc.data()["name"] as! String
                         let age = doc.data()["age"] as! String
+                        let fixed = doc.data()["fixed"] as! Bool
+                        let gender = doc.data()["gender"] as! String
                         let bio = doc.data()["bio"] as! String
                         let userEmail = doc.data()["userEmail"] as! String
+                        let pics = doc.data()["pics"] as! [String]
 
                         return Dog(name: name,
                                    aboutMe: bio,
                                    age: age,
+                                   gender: gender,
+                                   fixed: fixed,
+                                   pics: pics,
                                    userEmail: userEmail)
                     })
                     
@@ -219,7 +230,7 @@ class DatabaseManager {
         }
     }
     
-    // Retrieving all users from database for search results
+    // Retrieving all users from database
     public func getAllUsers(completion: @escaping (Result<[[String: String]], Error>) -> Void) {
         db.collection("users").addSnapshotListener { (querySnapshot, error) in
             if let e = error {

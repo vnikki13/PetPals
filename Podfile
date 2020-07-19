@@ -13,5 +13,8 @@ target 'PetPals' do
   
   # Pods for ImagePicker UI
   pod 'ImagePicker'
+  
+  # Spinner
+  pod 'JGProgressHUD'
 
 end

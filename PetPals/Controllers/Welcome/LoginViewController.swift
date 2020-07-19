@@ -13,6 +13,7 @@ class LoginViewController: UIViewController {
 
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var loginButton: UIButton!
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -22,7 +23,7 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        loginButton.layer.cornerRadius = 20
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -59,7 +60,7 @@ class LoginViewController: UIViewController {
         }
     }
     
-    func alertUserLoginError(with message: String) {
+    func alertUserLoginError(with message: String = "Please enter all information to log in.") {
         let alert = UIAlertController(title: "Woops",
                                       message: message,
                                       preferredStyle: .alert)

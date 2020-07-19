@@ -14,6 +14,7 @@ class DetailsPageTableCollectionViewCell: UICollectionViewCell {
     
     public let imageView: UIImageView = {
         let image = UIImageView()
+        image.contentMode = .scaleAspectFit
         return image
     }()
     
@@ -43,7 +44,5 @@ class DetailsPageTableCollectionViewCell: UICollectionViewCell {
         DispatchQueue.main.async {
             self.imageView.sd_setImage(with: url, completed: nil)
         }
-
-//        imageView.image = UIImage(named: model.imageName)
     }
 }

@@ -19,7 +19,9 @@ class DogsViewController: UIViewController {
         super.viewDidLoad()
         
         let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: 120, height: 120)
+        layout.sectionInset = UIEdgeInsets(top: 10, left: 13, bottom: 0, right: 13)
+        layout.minimumLineSpacing = 5
+        layout.itemSize = CGSize(width: (self.collectionView.frame.size.width - 20)/3, height: self.collectionView.frame.size.height/3)
         collectionView.collectionViewLayout = layout
         
         collectionView.register(DogsCollectionViewCell.nib(), forCellWithReuseIdentifier: DogsCollectionViewCell.identifier)
@@ -34,8 +36,10 @@ class DogsViewController: UIViewController {
         DatabaseManager().getAllDogs(completion: { result in
             switch result {
             case .success(let dogs):
-                print("got all dogs: \(dogs)")
                 self.dogs = dogs
+                
+                // filter dogs so user dosn't see their own dog
+                self.filterDogs()
                 
                 DispatchQueue.main.async {
                     self.collectionView.reloadData()
@@ -45,6 +49,22 @@ class DogsViewController: UIViewController {
                 print("failed to get dogs: \(error)")
             }
         })
+    }
+    
+    private func filterDogs() {
+        guard let currentUserEmail = UserDefaults.standard.value(forKey: "email") as? String else {
+            return
+        }
+        
+        let results: [Dog] = dogs.filter({ (dog:Dog) -> Bool in
+            if dog.userEmail == currentUserEmail {
+                return false
+            } else {
+                return true
+            }
+        })
+        
+        dogs = results
     }
 
 }
@@ -75,7 +95,9 @@ extension DogsViewController: UICollectionViewDataSource {
         
         let model = dogs[indexPath.row]
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DogsCollectionViewCell.identifier, for: indexPath) as! DogsCollectionViewCell
-
+        cell.layer.borderColor = UIColor.lightGray.cgColor
+        cell.layer.borderWidth = 0.5
+        cell.layer.cornerRadius = 10
         cell.configure(with: model)
 
         return cell

@@ -36,10 +36,6 @@ class ConversationsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .compose,
-                                                            target: self,
-                                                            action: #selector(didTapComposeButton))
-    
         
         view.addSubview(tableView)
         view.addSubview(noConversationsLabel)
@@ -83,38 +79,11 @@ class ConversationsViewController: UIViewController {
         tableView.dataSource = self
     }
     
-    @objc private func didTapComposeButton() {
-        let vc = NewConversationViewController()
-        vc.completion = { [weak self] result in
-            guard let strongSelf = self else {
-                return
-            }
-            
-            let currentConversations = strongSelf.conversations
-
-            if let targetConversation = currentConversations.first(where: {
-                $0.otherUserEmail == result.email
-            }) {
-                let vc = ChatViewController(email: targetConversation.otherUserEmail, id: targetConversation.id, name: targetConversation.name)
-                vc.isNewConversation = false
-                vc.title = targetConversation.name
-                vc.navigationItem.largeTitleDisplayMode = .never
-                strongSelf.navigationController?.pushViewController(vc, animated: true)
-            } else {
-                strongSelf.createNewConversation(result: result)
-            }
-        }
-        
-        let navVC = UINavigationController(rootViewController: vc)
-        present(navVC, animated: true)
-    }
-    
     private func createNewConversation(result: SearchResult) {
         let name = result.name
         let email = result.email
 
         let vc = ChatViewController(email: email, id: nil, name: name)
-        vc.isNewConversation = true
         vc.title = name
         vc.navigationItem.largeTitleDisplayMode = .never
         navigationController?.pushViewController(vc, animated: true)

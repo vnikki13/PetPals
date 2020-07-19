@@ -10,44 +10,58 @@ import UIKit
 import Firebase
 
 class RegisterViewController: UIViewController {
-
+    
     @IBOutlet weak var firstNameTextField: UITextField!
     @IBOutlet weak var lastNameTextField: UITextField!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var registerButton: UIButton!
     
+    
+    override func viewWillAppear(_ animated: Bool) {
+        navigationController?.isNavigationBarHidden = false
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        registerButton.layer.cornerRadius = 20
     }
     
-    
-    @IBAction func addDogInfoPressed(_ sender: UIButton) {
-        
-        guard let firstName = firstNameTextField.text, let lastName = lastNameTextField.text, let email = emailTextField.text, let password = passwordTextField.text else {
-            // TODO: create check for email and password fields and alert user of error
-            print("invalid register info")
-            return
+    @IBAction func registerButtonPressed(_ sender: UIButton) {
+        guard let firstName = firstNameTextField.text,
+            let lastName = lastNameTextField.text,
+            let email = emailTextField.text,
+            let password = passwordTextField.text else {
+                return
         }
         
-        let newUser = User(firstName: firstName, lastName: lastName, email: email)
-        
-        // TODO: Uncomment after register process is setup
-//        self.performSegue(withIdentifier: "RegisterToDogInfo", sender: self)
-        
-        
-        DatabaseManager().authenticateNewUser(newUser, with: password, completion: { success in
-            if success {
-
-                DatabaseManager().insertNewUser(newUser)
-
-                self.performSegue(withIdentifier: "RegisterToDogInfo", sender: self)
-
-            } else {
-                // TODO: create check for email and password fields and alert user of error
-                print("Unable to create account")
-            }
-        })
-        
+        if firstName.isEmpty ||
+            lastName.isEmpty ||
+            email.isEmpty ||
+            password.isEmpty {
+            alertUserRegisterError()
+            
+        } else {
+            let newUser = User(firstName: firstName, lastName: lastName, email: email)
+            DatabaseManager().authenticateNewUser(newUser, with: password, completion: { result in
+                switch result {
+                case .success(let message):
+                    print(message)
+                    self.performSegue(withIdentifier: "RegisterToDogInfo", sender: self)
+                case .failure(let error):
+                    self.alertUserRegisterError(message: error.localizedDescription)
+                }
+            })
+            
+            DatabaseManager().insertNewUser(newUser)
+        }
+    }
+    
+    func alertUserRegisterError(message: String = "Please enter all information to create a new account.") {
+        let alert = UIAlertController(title: "Woops",
+                                      message: message,
+                                      preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title:"Dismiss",
+                                      style: .cancel, handler: nil))
+        present(alert, animated: true)
     }
 }

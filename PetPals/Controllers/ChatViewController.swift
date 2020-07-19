@@ -15,10 +15,12 @@ class ChatViewController: MessagesViewController {
     
     let db = Firestore.firestore()
     
+    private var senderPhotoURL: URL?
+    private var recipientPhotoURL: URL?
+    
     public let recipientEmail: String
     public let recipientName: String
     private var conversationId: String?
-    public var isNewConversation = false
     
     var messages = [Message]()
     
@@ -30,13 +32,25 @@ class ChatViewController: MessagesViewController {
         return Sender(senderId: email, displayName: "Me")
     }
     
-    
-    
     init(email: String, id: String?, name: String) {
         self.conversationId = id
         self.recipientEmail = email
         self.recipientName = name
         super.init(nibName: nil, bundle: nil)
+        
+        if conversationId == nil {
+            guard let userEmail = Auth.auth().currentUser?.email else {
+                return
+            }
+            
+            DatabaseManager().conversationExists(for: userEmail, with: recipientEmail, completion: { success in
+                guard let success = success else {
+                    return
+                }
+                
+                self.conversationId = success
+            })
+        }
     }
 
     required init?(coder: NSCoder) {
@@ -56,11 +70,11 @@ class ChatViewController: MessagesViewController {
         super.viewDidAppear(animated)
         messageInputBar.inputTextView.becomeFirstResponder()
         if let conversationID = conversationId {
-            listenForMessages(id: conversationID, shouldScrollToBottom: true)
+            listenForMessages(id: conversationID)
         }
     }
     
-    private func listenForMessages(id: String, shouldScrollToBottom: Bool) {
+    private func listenForMessages(id: String) {
         DatabaseManager().getAllMessagesForConversation(with: id, completion: { result in
             
             switch result {
@@ -71,16 +85,59 @@ class ChatViewController: MessagesViewController {
                 self.messages = messages
                 
                 DispatchQueue.main.async {
-                    self.messagesCollectionView.reloadDataAndKeepOffset()
-                    if shouldScrollToBottom {
-                        self.messagesCollectionView.scrollToBottom()
-                    }
+                    self.messagesCollectionView.reloadData()
                 }
                 
             case .failure(let error):
                 print("failed to get messages: \(error)")
             }
         })
+    }
+    
+    func configureAvatarView(_ avatarView: AvatarView, for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) {
+        let sender = message.sender
+        
+        if sender.senderId == currentUser?.senderId {
+            // show current user image
+            if let currentUserImageURL = self.senderPhotoURL {
+                avatarView.sd_setImage(with: currentUserImageURL, completed: nil)
+            } else {
+                guard let email = UserDefaults.standard.value(forKey: "email") as? String else {
+                    return
+                }
+                
+                // fetch url
+                let path = "images/\(email)/photo_1.png"
+                StorageManager.shared.downloadURL(for: path, completion: { result in
+                    switch result {
+                    case .success(let url):
+                        self.senderPhotoURL = url
+                        DispatchQueue.main.async {
+                            avatarView.sd_setImage(with: url, completed: nil)
+                        }
+                    case .failure(let error):
+                        print(error)
+                    }
+                })
+            }
+        } else {
+            // show recipient image
+            let email = recipientEmail
+            
+            // fetch url
+            let path = "images/\(email)/photo_1.png"
+            StorageManager.shared.downloadURL(for: path, completion: { result in
+                switch result {
+                case .success(let url):
+                    self.recipientPhotoURL = url
+                    DispatchQueue.main.async {
+                        avatarView.sd_setImage(with: url, completed: nil)
+                    }
+                case .failure(let error):
+                    print(error)
+                }
+            })
+        }
     }
 }
 
@@ -94,6 +151,15 @@ extension ChatViewController: InputBarAccessoryViewDelegate {
         print("Sending message: \(message)")
         messageInputBar.inputTextView.text = nil
         DatabaseManager().sendMessage(from: senderEmail, to: recipientEmail, aka: recipientName, with: message)
+        
+        // Reload page after message is sent
+        DatabaseManager().conversationExists(for: senderEmail, with: recipientEmail, completion: { id in
+            guard let conversationId = id else {
+                return
+            }
+            
+            self.listenForMessages(id: conversationId)
+        })
     }
 }
 
@@ -104,6 +170,8 @@ extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, Messag
             return sender
         }
          
+        // TODO: Stop listening for messages?
+        
         fatalError("Current user email is nil, email should be cached")
     }
     
