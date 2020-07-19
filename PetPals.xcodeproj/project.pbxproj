@@ -22,8 +22,6 @@
 		A11C4E2824BE73980059D51E /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11C4E2724BE73980059D51E /* StorageManager.swift */; };
 		A11C4E2A24BE84220059D51E /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11C4E2924BE84220059D51E /* ProfileViewController.swift */; };
 		A1452C4E24BFC67700D1EFD4 /* DogTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1452C4D24BFC67700D1EFD4 /* DogTableViewCell.swift */; };
-		A15F8B9124BBFAD3007E47B0 /* NewConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15F8B9024BBFAD3007E47B0 /* NewConversationViewController.swift */; };
-		A164807A24BD673900A2953E /* NewConversationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A164807924BD673900A2953E /* NewConversationCell.swift */; };
 		A196968824C0C7FD0098C871 /* DogsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A196968724C0C7FD0098C871 /* DogsViewController.swift */; };
 		A196968B24C0CD8B0098C871 /* DogsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A196968924C0CD8B0098C871 /* DogsCollectionViewCell.swift */; };
 		A196968C24C0CD8B0098C871 /* DogsCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A196968A24C0CD8B0098C871 /* DogsCollectionViewCell.xib */; };
@@ -63,8 +61,6 @@
 		A11C4E2724BE73980059D51E /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		A11C4E2924BE84220059D51E /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		A1452C4D24BFC67700D1EFD4 /* DogTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogTableViewCell.swift; sourceTree = "<group>"; };
-		A15F8B9024BBFAD3007E47B0 /* NewConversationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewConversationViewController.swift; sourceTree = "<group>"; };
-		A164807924BD673900A2953E /* NewConversationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewConversationCell.swift; sourceTree = "<group>"; };
 		A196968724C0C7FD0098C871 /* DogsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogsViewController.swift; sourceTree = "<group>"; };
 		A196968924C0CD8B0098C871 /* DogsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogsCollectionViewCell.swift; sourceTree = "<group>"; };
 		A196968A24C0CD8B0098C871 /* DogsCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DogsCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -181,7 +177,6 @@
 				A1E3BCAB24B7CF48000E5041 /* ConversationsViewController.swift */,
 				A1E3BCA524B7BC34000E5041 /* ChatViewController.swift */,
 				A11C4E2924BE84220059D51E /* ProfileViewController.swift */,
-				A15F8B9024BBFAD3007E47B0 /* NewConversationViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -192,7 +187,6 @@
 				A196968A24C0CD8B0098C871 /* DogsCollectionViewCell.xib */,
 				A196968924C0CD8B0098C871 /* DogsCollectionViewCell.swift */,
 				A1E1E2B024BB7E5F00879BD8 /* ConversationTableViewCell.swift */,
-				A164807924BD673900A2953E /* NewConversationCell.swift */,
 				A1452C4D24BFC67700D1EFD4 /* DogTableViewCell.swift */,
 				A196968E24C101DF0098C871 /* DetailsPageCollectionTableViewCell.swift */,
 				A196969024C1020D0098C871 /* DetailsPageTableCollectionViewCell.swift */,
@@ -342,7 +336,6 @@
 				A115E59B24B79B3E00AEC483 /* AppDelegate.swift in Sources */,
 				A115E59D24B79B3E00AEC483 /* SceneDelegate.swift in Sources */,
 				A196969124C1020D0098C871 /* DetailsPageTableCollectionViewCell.swift in Sources */,
-				A164807A24BD673900A2953E /* NewConversationCell.swift in Sources */,
 				A1E3BCAA24B7C7F4000E5041 /* Message.swift in Sources */,
 				A1E3BCA624B7BC34000E5041 /* ChatViewController.swift in Sources */,
 				A115E5B824B7AE7800AEC483 /* RegisterViewController.swift in Sources */,
@@ -352,7 +345,6 @@
 				A11C4E2324BE273C0059D51E /* DogInfoViewController.swift in Sources */,
 				A196969424C106510098C871 /* DetailsPageViewController.swift in Sources */,
 				A115E5B624B7AE6900AEC483 /* LoginViewController.swift in Sources */,
-				A15F8B9124BBFAD3007E47B0 /* NewConversationViewController.swift in Sources */,
 				A11C4E2524BE274C0059D51E /* DogBioViewController.swift in Sources */,
 				A196968F24C101DF0098C871 /* DetailsPageCollectionTableViewCell.swift in Sources */,
 				A1E3BCA824B7C3F4000E5041 /* Constants.swift in Sources */,
