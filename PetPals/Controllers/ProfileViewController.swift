@@ -59,6 +59,20 @@ class ProfileViewController: UIViewController {
                     handler: nil)
                 )
                 
+                if fixed == 0 {
+                    self.dogInfo.append(ProfileViewModel(
+                        viewModelType: .info,
+                        title: "Fixed: No",
+                        handler: nil)
+                    )
+                } else {
+                    self.dogInfo.append(ProfileViewModel(
+                        viewModelType: .info,
+                        title: "Fixed: Yes",
+                        handler: nil)
+                    )
+                }
+                
                 self.tableView.reloadData()
                 
             case .failure(let err):
