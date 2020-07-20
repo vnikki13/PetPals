@@ -38,7 +38,7 @@ class LoginViewController: UIViewController {
                     // Alert label for the user
                     self.alertUserLoginError(with: error.localizedDescription)
                 } else {
-                    DatabaseManager().getDataFor(email: email, completion: {result in
+                    DatabaseManager().getDataForUser(email: email, completion: {result in
                         switch result {
                         case .success(let data):
                             guard let firstName = data as? String else {

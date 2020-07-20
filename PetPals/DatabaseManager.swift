@@ -29,7 +29,7 @@ class DatabaseManager {
         }
     }
     
-    func getDataFor(email: String, completion: @escaping (Result<Any, Error>) -> Void) {
+    func getDataForUser(email: String, completion: @escaping (Result<Any, Error>) -> Void) {
         db.collection("users").whereField("email", isEqualTo: email).getDocuments{ (querySnapshot, err) in
             if let err = err {
                 print("Error getting docment: \(err)")
@@ -37,6 +37,19 @@ class DatabaseManager {
             } else {
                 for document in querySnapshot!.documents {
                     completion(.success(document.data()["firstName"]!))
+                }
+            }
+        }
+    }
+    
+    func getDataForDog(email: String, completion: @escaping (Result<DocumentSnapshot, Error>) -> Void) {
+        db.collection("dogs").whereField("userEmail", isEqualTo: email).getDocuments{ (querySnapshot, err) in
+            if let err = err {
+                print("Error getting document: \(err)")
+                completion(.failure(err))
+            } else {
+                for document in querySnapshot!.documents {
+                    completion(.success(document))
                 }
             }
         }

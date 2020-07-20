@@ -14,11 +14,68 @@ class ProfileViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
-    let data = UserDefaults.standard.value(forKey: "firstName") as? String
+    var userInfo = [ProfileViewModel]()
+    var dogInfo = [ProfileViewModel]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        
+        guard let userEmail = UserDefaults.standard.value(forKey: "email") as? String else {
+            return
+        }
+        
+        DatabaseManager().getDataForDog(email: userEmail, completion: { result in
+            switch result {
+            case .success(let doc):
+                guard let name = doc.data()!["name"],
+                    let age = doc.data()!["age"],
+                    let gender = doc.data()!["gender"],
+                    let fixed = doc.data()!["fixed"] as! Int?,
+                    let bio = doc.data()!["bio"] else {
+                        return
+                }
+                
+                self.dogInfo.append(ProfileViewModel(
+                    viewModelType: .info,
+                    title: "Name: \(name)",
+                    handler: nil)
+                )
+                
+                self.dogInfo.append(ProfileViewModel(
+                    viewModelType: .info,
+                    title: "Age: \(age)",
+                    handler: nil)
+                )
+                
+                self.dogInfo.append(ProfileViewModel(
+                    viewModelType: .info,
+                    title: "Gender: \(gender)",
+                    handler: nil)
+                )
+                
+                self.dogInfo.append(ProfileViewModel(
+                    viewModelType: .info,
+                    title: "Bio: \(bio)",
+                    handler: nil)
+                )
+                
+                self.tableView.reloadData()
+                
+            case .failure(let err):
+                print("Could not find documentation: \(err)")
+            }
+        })
+        
+        tableView.register(ProfileTableViewCell.self,
+                           forCellReuseIdentifier: ProfileTableViewCell.identifier)
+        
+        userInfo.append(ProfileViewModel(viewModelType: .info,
+                                     title: "Name: \(UserDefaults.standard.value(forKey:"firstName") as? String ?? "No Name")",
+            handler: nil))
+        userInfo.append(ProfileViewModel(viewModelType: .info,
+                                     title: "Email: \(UserDefaults.standard.value(forKey:"email") as? String ?? "No Email")",
+            handler: nil))
+        
         tableView.delegate = self
         tableView.dataSource = self
         tableView.isUserInteractionEnabled = false
@@ -30,26 +87,24 @@ class ProfileViewController: UIViewController {
             return nil
         }
         
-        let path = "images/\(email)/photo_1.png"
-        
         let headerView = UIView(frame: CGRect(x: 0,
                                         y: 0,
                                         width: self.view.width,
                                         height: 300))
         
-        let imageView = UIImageView(frame: CGRect(x: 0,
-                                                  y: 0,
-                                                  width: self.view.width,
-                                                  height: 300))
-        imageView.backgroundColor = .white
+        let imageView = UIImageView(frame: CGRect(x: 10,
+                                                  y: 10,
+                                                  width: self.view.width - 20,
+                                                  height: 300 - 20))
+        headerView.backgroundColor = #colorLiteral(red: 0.9692688584, green: 0.7734904885, blue: 0.6585031748, alpha: 1)
         imageView.contentMode = .scaleAspectFill
-        imageView.layer.borderColor = UIColor.white.cgColor
-        imageView.layer.borderWidth = 3
         imageView.layer.masksToBounds = true
+        imageView.layer.cornerRadius = imageView.width/20
         headerView.addSubview(imageView)
         
-        navigationItem.title = data
+        navigationItem.title = "Profile"
         
+        let path = "images/\(email)/photo_1.png"
         StorageManager.shared.downloadURL(for: path, completion: { result in
             switch result {
             case .success(let url):
@@ -77,13 +132,36 @@ class ProfileViewController: UIViewController {
 
 extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        if section == 0 {
+            return userInfo.count
+        }
+        return dogInfo.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel?.text = data
-        cell.textLabel?.textAlignment = .center
+        let cell = tableView.dequeueReusableCell(withIdentifier: ProfileTableViewCell.identifier,
+                                                 for: indexPath) as! ProfileTableViewCell
+        
+        let viewModel = indexPath.section == 0 ? userInfo[indexPath.row] : dogInfo[indexPath.row]
+        cell.setUp(with: viewModel)
         return cell
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let label = UILabel()
+        if section == 0 {
+            label.text = "User"
+        } else {
+            label.text = "Dog"
+        }
+        
+        label.textAlignment = .center
+        label.font = label.font.withSize(25)
+        label.textColor = #colorLiteral(red: 0.4039215686, green: 0.6078431373, blue: 0.6078431373, alpha: 1)
+        return label
     }
 }

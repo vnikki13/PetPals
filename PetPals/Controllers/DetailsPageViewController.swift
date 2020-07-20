@@ -46,7 +46,7 @@ class DetailsPageViewController: UIViewController {
     }
     
     @objc private func didTapComposeButton() {
-        DatabaseManager().getDataFor(email: dog.userEmail, completion: { result in
+        DatabaseManager().getDataForUser(email: dog.userEmail, completion: { result in
             switch result {
             case .success(let info):
                 guard let name = info as? String else {
@@ -88,8 +88,6 @@ class DetailsPageViewController: UIViewController {
         super.viewDidLayoutSubviews()
         table.frame = view.bounds
     }
-    
-    
 
 }
 
