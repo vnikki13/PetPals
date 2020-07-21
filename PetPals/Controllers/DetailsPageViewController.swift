@@ -11,6 +11,7 @@ import UIKit
 class DetailsPageViewController: UIViewController {
 
     let dog: Dog
+    let dogOwner = String()
     
     init(with model: Dog) {
         self.dog = model
@@ -68,17 +69,43 @@ class DetailsPageViewController: UIViewController {
     }
     
     private func setUpModels() {
+        DatabaseManager().getDataForUser(email: dog.userEmail, completion: { result in
+            switch result {
+            case .success(let data):
+                guard let firstName = data as? String else {
+                    return
+                }
+                print(firstName)
+                
+            case .failure(let error):
+                print(error)
+            }
+        })
         
-        let modelCollection = dog.pics.sorted().map({ (pic: String) -> CollectionTableCellModel in
+        let modelCollection = self.dog.pics.sorted().map({ (pic: String) -> CollectionTableCellModel in
             return CollectionTableCellModel(imageName: pic)
         })
         
         self.models.append(.collectionView(models: modelCollection, rows: 1))
         
         self.models.append(.list(models: [
-            ListCellModel(title: self.dog.name),
-            ListCellModel(title: self.dog.age + " old"),
             ListCellModel(title: self.dog.aboutMe),
+            ListCellModel(title: self.dog.age + " old"),
+            ListCellModel(title: self.dog.gender),
+        ]))
+        
+        if self.dog.fixed {
+            self.models.append(.list(models: [
+                ListCellModel(title: "I am fixed")
+            ]))
+        } else {
+            self.models.append(.list(models: [
+                ListCellModel(title: "I am not fixed")
+            ]))
+        }
+        
+        self.models.append(.list(models: [
+            ListCellModel(title: "Owner: " ),
         ]))
         
         
@@ -111,6 +138,7 @@ extension DetailsPageViewController: UITableViewDelegate, UITableViewDataSource 
             let model = models[indexPath.row]
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
             cell.textLabel?.text = model.title
+            cell.textLabel?.numberOfLines = 0
             cell.isUserInteractionEnabled = false
             return cell
             

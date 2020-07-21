@@ -14,9 +14,12 @@ class WelcomeViewController: UIViewController {
     @IBOutlet weak var registerButton: UIButton!
     @IBOutlet weak var loginButton: UIButton!
     
+    private var shouldHideNavigationBar: Bool = false
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(false)
+        shouldHideNavigationBar = false
+        navigationController?.isNavigationBarHidden = true
         validateAuth()
     }
     
@@ -27,9 +30,15 @@ class WelcomeViewController: UIViewController {
         self.loginButton.layer.cornerRadius = 20
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        navigationController?.isNavigationBarHidden = shouldHideNavigationBar
+    }
+    
     private func validateAuth() {
         if Auth.auth().currentUser != nil {
-            navigationController?.isNavigationBarHidden = true
+            shouldHideNavigationBar = true
             performSegue(withIdentifier: "WelcomeToTabBar", sender: self)
         }
     }

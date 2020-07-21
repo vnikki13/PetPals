@@ -424,17 +424,23 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YYL-N3-JHa">
-                                        <rect key="frame" x="8.5" y="399" width="313" height="121"/>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Type in here" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="6En-Iz-Pnq">
+                                        <rect key="frame" x="45" y="399" width="240" height="121"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="68" id="R8B-MH-s56"/>
-                                            <constraint firstAttribute="width" constant="313" id="bru-rY-Gvd"/>
+                                            <constraint firstAttribute="width" constant="240" id="8pX-eP-24j"/>
+                                            <constraint firstAttribute="height" constant="121" id="TVn-hL-S84"/>
                                         </constraints>
+                                        <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstItem="6En-Iz-Pnq" firstAttribute="top" secondItem="nmg-Bq-hIy" secondAttribute="bottom" constant="15" id="Fnh-A3-fkG"/>
+                                    <constraint firstItem="6En-Iz-Pnq" firstAttribute="leading" secondItem="w4M-Tz-h8J" secondAttribute="leading" constant="45" id="Iht-gR-imd"/>
+                                    <constraint firstAttribute="trailing" secondItem="6En-Iz-Pnq" secondAttribute="trailing" constant="45" id="M8H-u6-KYL"/>
+                                    <constraint firstAttribute="bottom" secondItem="6En-Iz-Pnq" secondAttribute="bottom" id="ReC-YI-VAc"/>
                                     <constraint firstAttribute="width" constant="330" id="Tlr-c8-NFl"/>
                                     <constraint firstAttribute="height" constant="520" id="frb-7o-7eY"/>
                                 </constraints>
@@ -454,7 +460,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Dog Personality" largeTitleDisplayMode="always" id="XPr-0k-wsx"/>
                     <connections>
-                        <outlet property="aboutMeTextField" destination="YYL-N3-JHa" id="ulF-HJ-Prl"/>
+                        <outlet property="aboutMeTextView" destination="6En-Iz-Pnq" id="YWY-jU-o98"/>
                         <outlet property="finishButton" destination="r9e-OM-Plc" id="zTU-qk-Od7"/>
                         <outlet property="image1View" destination="TrI-Xo-OD0" id="usg-P6-zcJ"/>
                         <outlet property="image2View" destination="yf7-xV-wQ6" id="WLU-wI-nU3"/>
@@ -559,7 +565,7 @@
             <objects>
                 <viewController id="4w0-z4-QlF" customClass="ConversationsViewController" customModule="PetPals" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Bsk-xH-nH5">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="813"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="1qy-dz-jl0"/>
@@ -576,11 +582,13 @@
             <objects>
                 <tabBarController storyboardIdentifier="TabBarView" id="P40-3V-m85" customClass="MainTabBarController" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="7uw-uc-Cew"/>
-                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="kvX-LN-BhQ">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="kvX-LN-BhQ">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="tintColor" red="0.40480634570000001" green="0.6085137129" blue="0.60961699489999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <color key="selectedImageTintColor" red="0.40480634570000001" green="0.6085137129" blue="0.60961699489999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.99998098609999997" green="0.60373932119999996" blue="0.46315252779999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="tintColor" red="0.4039215686" green="0.60784313729999995" blue="0.60784313729999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="barTintColor" red="0.99998098609999997" green="0.60373932119999996" blue="0.46315252779999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="selectedImageTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
                         <segue destination="LMU-CF-755" kind="relationship" relationship="viewControllers" id="f1A-3u-kgr"/>
@@ -600,10 +608,8 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="C2g-Sn-cDd">
                         <rect key="frame" x="0.0" y="44" width="414" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" red="0.99998098609999997" green="0.60373932119999996" blue="0.46315252779999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
                         <color key="tintColor" red="1" green="0.91833394769999999" blue="0.85916018490000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <color key="barTintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -612,14 +618,14 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0B1-5x-yrL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-36.231884057971016" y="154.6875"/>
+            <point key="canvasLocation" x="-39" y="175"/>
         </scene>
         <!--Profile-->
         <scene sceneID="cuJ-Qi-bwF">
             <objects>
                 <viewController id="iSV-3E-btz" customClass="ProfileViewController" customModule="PetPals" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="lZW-uC-t2I">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="813"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ucR-mg-Pqo">
@@ -669,12 +675,12 @@
             <objects>
                 <viewController id="Q0B-km-IWH" customClass="DogsViewController" customModule="PetPals" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="odp-Lw-tMB">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="813"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" contentInsetAdjustmentBehavior="always" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="J9L-Ew-3En">
                                 <rect key="frame" x="0.0" y="88" width="414" height="725"/>
-                                <color key="backgroundColor" red="0.96926885839999999" green="0.77349048850000002" blue="0.65850317479999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="1" green="0.91833394769999999" blue="0.85916018490000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="BaB-lA-qHu">
                                     <size key="itemSize" width="150" height="150"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -764,7 +770,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="JUm-kA-L3o"/>
+        <segue reference="tkE-la-xKI"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.40480634570000001" green="0.6085137129" blue="0.60961699489999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
     <resources>

@@ -92,7 +92,7 @@ class ProfileViewController: UIViewController {
         
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.isUserInteractionEnabled = false
+        tableView.isUserInteractionEnabled = true
         tableView.tableHeaderView = createTableHeader()
     }
     
@@ -110,7 +110,7 @@ class ProfileViewController: UIViewController {
                                                   y: 10,
                                                   width: self.view.width - 20,
                                                   height: 300 - 20))
-        headerView.backgroundColor = #colorLiteral(red: 0.9692688584, green: 0.7734904885, blue: 0.6585031748, alpha: 1)
+        headerView.backgroundColor = #colorLiteral(red: 1, green: 0.9183339477, blue: 0.8591601849, alpha: 1)
         imageView.contentMode = .scaleAspectFill
         imageView.layer.masksToBounds = true
         imageView.layer.cornerRadius = imageView.width/20
@@ -157,6 +157,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
                                                  for: indexPath) as! ProfileTableViewCell
         
         let viewModel = indexPath.section == 0 ? userInfo[indexPath.row] : dogInfo[indexPath.row]
+        cell.textLabel?.numberOfLines = 0
         cell.setUp(with: viewModel)
         return cell
     }

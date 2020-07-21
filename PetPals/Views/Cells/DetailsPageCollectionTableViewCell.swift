@@ -74,4 +74,10 @@ extension DetailsPageCollectionTableViewCell: UICollectionViewDelegate, UICollec
         cell.configure(with: model)
         return cell
     }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt Selection: Int) -> UIEdgeInsets { return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0) }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt selection: Int) -> CGFloat{ return 0 }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt selection: Int) -> CGFloat{ return 0 }
 }

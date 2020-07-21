@@ -18,7 +18,7 @@ class DogBioViewController: UIViewController {
     @IBOutlet weak var image3View: UIImageView!
     @IBOutlet weak var image4View: UIImageView!
     
-    @IBOutlet weak var aboutMeTextField: UITextField!
+    @IBOutlet weak var aboutMeTextView: UITextView!
     @IBOutlet weak var selectPhotoButton: UIButton!
     @IBOutlet weak var finishButton: UIButton!
     
@@ -31,14 +31,22 @@ class DogBioViewController: UIViewController {
     var aboutMe: String?
     var imagesList = [UIImage]()
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: false)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         selectPhotoButton.layer.cornerRadius = 20
+        aboutMeTextView.layer.borderColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
+        aboutMeTextView.layer.borderWidth = 3
         finishButton.layer.cornerRadius = 20
     }
     
     override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
         navigationController?.setNavigationBarHidden(true, animated: false)
     }
     
@@ -51,7 +59,7 @@ class DogBioViewController: UIViewController {
     }
     
     @IBAction func finishButtonTapped(_ sender: UIButton) {
-        aboutMe = aboutMeTextField.text
+        aboutMe = aboutMeTextView.text
         
         guard let useremail = Auth.auth().currentUser?.email else {
             return

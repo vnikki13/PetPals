@@ -30,10 +30,10 @@ class DetailsPageTableCollectionViewCell: UICollectionViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        imageView.frame = CGRect(x: 5,
-                                 y: 5,
-                                 width: contentView.width - 10,
-                                 height: contentView.height - 10)
+        imageView.frame = CGRect(x: 0,
+                                 y: 0,
+                                 width: contentView.width,
+                                 height: contentView.height)
     }
     
     public func configure(with model: CollectionTableCellModel) {
