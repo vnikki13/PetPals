@@ -169,7 +169,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let label = UILabel()
         if section == 0 {
-            label.text = "User"
+            label.text = "Owner"
         } else {
             label.text = "Dog"
         }

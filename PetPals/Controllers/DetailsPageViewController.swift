@@ -11,7 +11,6 @@ import UIKit
 class DetailsPageViewController: UIViewController {
 
     let dog: Dog
-    let dogOwner = String()
     
     init(with model: Dog) {
         self.dog = model
@@ -22,11 +21,15 @@ class DetailsPageViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    let detailsPageTable = UITableView()
+    
     private let table: UITableView = {
         let table = UITableView(frame: .zero, style: .plain)
         table.separatorStyle = UITableViewCell.SeparatorStyle.none
-        table.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
-        table.register(DetailsPageCollectionTableViewCell.self, forCellReuseIdentifier: DetailsPageCollectionTableViewCell.identifier)
+        let nib = UINib(nibName: DetailsPageTableViewCell.identifier, bundle: nil)
+        table.register(nib, forCellReuseIdentifier: DetailsPageTableViewCell.identifier)
+        table.register(DetailsPageCollectionTableViewCell.self,
+                       forCellReuseIdentifier: DetailsPageCollectionTableViewCell.identifier)
         return table
     }()
     
@@ -72,10 +75,15 @@ class DetailsPageViewController: UIViewController {
         DatabaseManager().getDataForUser(email: dog.userEmail, completion: { result in
             switch result {
             case .success(let data):
-                guard let firstName = data as? String else {
+                guard let name = data as? String else {
                     return
                 }
-                print(firstName)
+                
+                self.models.append(.list(models: [
+                    ListCellModel(title: "Owner: \(name)" ),
+                ]))
+                
+                self.table.reloadData()
                 
             case .failure(let error):
                 print(error)
@@ -90,24 +98,19 @@ class DetailsPageViewController: UIViewController {
         
         self.models.append(.list(models: [
             ListCellModel(title: self.dog.aboutMe),
-            ListCellModel(title: self.dog.age + " old"),
-            ListCellModel(title: self.dog.gender),
+            ListCellModel(title: "Age: \(self.dog.age) old"),
+            ListCellModel(title: "Sex: \(self.dog.gender)"),
         ]))
         
         if self.dog.fixed {
             self.models.append(.list(models: [
-                ListCellModel(title: "I am fixed")
+                ListCellModel(title: "Fixed: Yes")
             ]))
         } else {
             self.models.append(.list(models: [
-                ListCellModel(title: "I am not fixed")
+                ListCellModel(title: "Fixed: No")
             ]))
         }
-        
-        self.models.append(.list(models: [
-            ListCellModel(title: "Owner: " ),
-        ]))
-        
         
     }
     
@@ -136,9 +139,9 @@ extension DetailsPageViewController: UITableViewDelegate, UITableViewDataSource 
         switch models[indexPath.section] {
         case .list(let models):
             let model = models[indexPath.row]
-            let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-            cell.textLabel?.text = model.title
-            cell.textLabel?.numberOfLines = 0
+            let cell = tableView.dequeueReusableCell(withIdentifier: DetailsPageTableViewCell.identifier, for: indexPath) as! DetailsPageTableViewCell
+            cell.cellView.layer.cornerRadius = 10
+            cell.descriptionLabel.text = model.title
             cell.isUserInteractionEnabled = false
             return cell
             
@@ -153,13 +156,21 @@ extension DetailsPageViewController: UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+
         switch models[indexPath.section] {
         case .list(_):
-            return 50
+            return UITableView.automaticDimension
         case .collectionView(_, let rows):
             return 350 * CGFloat(rows)
         }
     }
     
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.section == 0 {
+            return UITableView.automaticDimension
+        } else {
+            return 40
+        }
+    }
     
 }

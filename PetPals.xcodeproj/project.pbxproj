@@ -21,6 +21,8 @@
 		A11C4E2524BE274C0059D51E /* DogBioViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11C4E2424BE274C0059D51E /* DogBioViewController.swift */; };
 		A11C4E2824BE73980059D51E /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11C4E2724BE73980059D51E /* StorageManager.swift */; };
 		A11C4E2A24BE84220059D51E /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11C4E2924BE84220059D51E /* ProfileViewController.swift */; };
+		A133239324C75E2E001447AF /* DetailsPageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A133239124C75E2E001447AF /* DetailsPageTableViewCell.swift */; };
+		A133239424C75E2E001447AF /* DetailsPageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A133239224C75E2E001447AF /* DetailsPageTableViewCell.xib */; };
 		A1452C4E24BFC67700D1EFD4 /* DogTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1452C4D24BFC67700D1EFD4 /* DogTableViewCell.swift */; };
 		A196407B24C51758001D5E2A /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A196407A24C51758001D5E2A /* ProfileTableViewCell.swift */; };
 		A196407D24C51833001D5E2A /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = A196407C24C51833001D5E2A /* Profile.swift */; };
@@ -62,6 +64,8 @@
 		A11C4E2424BE274C0059D51E /* DogBioViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogBioViewController.swift; sourceTree = "<group>"; };
 		A11C4E2724BE73980059D51E /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		A11C4E2924BE84220059D51E /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		A133239124C75E2E001447AF /* DetailsPageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsPageTableViewCell.swift; sourceTree = "<group>"; };
+		A133239224C75E2E001447AF /* DetailsPageTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailsPageTableViewCell.xib; sourceTree = "<group>"; };
 		A1452C4D24BFC67700D1EFD4 /* DogTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogTableViewCell.swift; sourceTree = "<group>"; };
 		A196407A24C51758001D5E2A /* ProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewCell.swift; sourceTree = "<group>"; };
 		A196407C24C51833001D5E2A /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
@@ -196,6 +200,8 @@
 				A196968E24C101DF0098C871 /* DetailsPageCollectionTableViewCell.swift */,
 				A196969024C1020D0098C871 /* DetailsPageTableCollectionViewCell.swift */,
 				A196407A24C51758001D5E2A /* ProfileTableViewCell.swift */,
+				A133239124C75E2E001447AF /* DetailsPageTableViewCell.swift */,
+				A133239224C75E2E001447AF /* DetailsPageTableViewCell.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -275,6 +281,7 @@
 				A115E5A724B79B4000AEC483 /* LaunchScreen.storyboard in Resources */,
 				A115E5AF24B7A0D200AEC483 /* GoogleService-Info.plist in Resources */,
 				A196968C24C0CD8B0098C871 /* DogsCollectionViewCell.xib in Resources */,
+				A133239424C75E2E001447AF /* DetailsPageTableViewCell.xib in Resources */,
 				A115E5A424B79B4000AEC483 /* Assets.xcassets in Resources */,
 				A115E5A224B79B3E00AEC483 /* Main.storyboard in Resources */,
 			);
@@ -344,6 +351,7 @@
 				A115E59D24B79B3E00AEC483 /* SceneDelegate.swift in Sources */,
 				A196969124C1020D0098C871 /* DetailsPageTableCollectionViewCell.swift in Sources */,
 				A1E3BCAA24B7C7F4000E5041 /* Message.swift in Sources */,
+				A133239324C75E2E001447AF /* DetailsPageTableViewCell.swift in Sources */,
 				A1E3BCA624B7BC34000E5041 /* ChatViewController.swift in Sources */,
 				A115E5B824B7AE7800AEC483 /* RegisterViewController.swift in Sources */,
 				A196407D24C51833001D5E2A /* Profile.swift in Sources */,

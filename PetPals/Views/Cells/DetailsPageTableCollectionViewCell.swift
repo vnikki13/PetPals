@@ -21,6 +21,7 @@ class DetailsPageTableCollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         contentView.addSubview(imageView)
+        
     }
     
     required init?(coder: NSCoder) {
@@ -34,6 +35,7 @@ class DetailsPageTableCollectionViewCell: UICollectionViewCell {
                                  y: 0,
                                  width: contentView.width,
                                  height: contentView.height)
+        
     }
     
     public func configure(with model: CollectionTableCellModel) {

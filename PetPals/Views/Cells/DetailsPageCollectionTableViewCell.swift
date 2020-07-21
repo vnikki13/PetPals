@@ -16,18 +16,23 @@ class DetailsPageCollectionTableViewCell: UITableViewCell {
     
     private let collectionView: UICollectionView
     
+    private lazy var imagePageControl: UIPageControl = {
+        let pc = UIPageControl()
+        pc.currentPage = 0
+        pc.currentPageIndicatorTintColor = .white
+        pc.pageIndicatorTintColor = .gray
+        return pc
+    }()
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
 
-        // TODO: readjust image sizes 
         let width = UIScreen.main.fixedCoordinateSpace.bounds.width
         let height = UIScreen.main.fixedCoordinateSpace.bounds.height
         
         layout.itemSize = CGSize(width: width, height: height)
         self.collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        
- 
         
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
@@ -40,11 +45,21 @@ class DetailsPageCollectionTableViewCell: UITableViewCell {
         collectionView.dataSource = self
         
         contentView.addSubview(collectionView)
+        contentView.addSubview(imagePageControl)
+    }
+    
+    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        
+        let x = targetContentOffset.pointee.x
+        
+        imagePageControl.currentPage = Int(x / contentView.frame.width)
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
         collectionView.frame = contentView.bounds
+        imagePageControl.frame = CGRect(x: (contentView.width/2) - 100, y: contentView.height - 40, width: contentView.width/2, height: 30)
+        imagePageControl.numberOfPages = models.count
     }
     
     public func configure(with models: [CollectionTableCellModel]) {

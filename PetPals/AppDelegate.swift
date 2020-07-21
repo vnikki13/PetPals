@@ -23,7 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         appearance.titleTextAttributes = [.foregroundColor: UIColor.white]
         appearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
 
-        UINavigationBar.appearance().tintColor = #colorLiteral(red: 0.4048063457, green: 0.6085137129, blue: 0.6096169949, alpha: 1)
+        UINavigationBar.appearance().tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         UINavigationBar.appearance().standardAppearance = appearance
         UINavigationBar.appearance().compactAppearance = appearance
         UINavigationBar.appearance().scrollEdgeAppearance = appearance
