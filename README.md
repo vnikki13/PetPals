@@ -17,3 +17,6 @@ To run this app, insure the lastest verson of cocopods is installed. Follow the 
 ##### Clone
 
 After installations, clone this repo into xcode and enjoy! 
+
+#### Trello Board
+[Link to trello board](https://trello.com/invite/b/IhjD7H5b/91d4f57076feb85ae53d2c195206e4b5/doggie-play-dates)
